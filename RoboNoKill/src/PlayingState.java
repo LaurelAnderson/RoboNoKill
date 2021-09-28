@@ -1,7 +1,3 @@
-import java.util.Iterator;
-
-import jig.Vector;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -26,7 +22,17 @@ class PlayingState extends BasicGameState {
                        Graphics g) throws SlickException {
         MainGame bg = (MainGame)game;
 
-        bg.suvivor.render(g);
+        bg.survivor.render(g);
+
+        // render all the walls of the map
+        // still do not know if I want to do it this way yet
+        for (int row = 0; row < bg.mapArray.length; row++) {
+           for (int col = 0; col < bg.mapArray[row].length; col++){
+               if (bg.mapArray[row][col] != null) {
+                   bg.mapArray[row][col].render(g);
+               }
+           }
+        }
 
 //        g.drawString("Bounces: " + bounces, 10, 30);
 
@@ -41,19 +47,19 @@ class PlayingState extends BasicGameState {
 
         // basic movement
         if (input.isKeyDown(Input.KEY_D)) {
-            bg.suvivor.translate(5,0);
+            bg.survivor.translate(5,0);
         }
         if (input.isKeyDown(Input.KEY_A)) {
-            bg.suvivor.translate(-5,0);
+            bg.survivor.translate(-5,0);
         }
         if (input.isKeyDown(Input.KEY_S)) {
-            bg.suvivor.translate(0,5);
+            bg.survivor.translate(0,5);
         }
         if (input.isKeyDown(Input.KEY_W)) {
-            bg.suvivor.translate(0,-5);
+            bg.survivor.translate(0,-5);
         }
 
-        bg.suvivor.update(delta);
+        bg.survivor.update(delta);
 
     }
 

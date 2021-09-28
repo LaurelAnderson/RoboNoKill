@@ -1,8 +1,8 @@
 ## Resolved Issues ##
+    - **[1]** Make a basic map that shows on the screen
 
 ## Open Issues ##
 
-    - **[1]** Make a basic map that shows on the screen
     - **[2]** Implement confined movement
     - **[3]** Add a basic robot with pathfinding
     - **[4]** Make it so the robot can catch the survivor
