@@ -1,3 +1,4 @@
+import jig.Vector;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -23,15 +24,12 @@ class PlayingState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         bg.survivor.render(g);
-
-        // render all the walls of the map
-        // still do not know if I want to do it this way yet
+        // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
            for (int col = 0; col < bg.mapArray.length; col++){
                bg.mapArray[row][col].render(g);
            }
         }
-
 //        g.drawString("Bounces: " + bounces, 10, 30);
 
     }
@@ -47,29 +45,35 @@ class PlayingState extends BasicGameState {
         // double check that this is working or better way?
         for (int row = 0; row < bg.mapArray.length; row++) {
             for (int col = 0; col < bg.mapArray.length; col++){
+
+                // create a helper for this
                 if (bg.survivor.getX() == bg.mapArray[row][col].getX() &&
-                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 20 &&
-                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 20 ||
+                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 10 &&
+                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 10 ||
                         bg.survivor.getY() == bg.mapArray[row][col].getY() &&
-                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 20 &&
-                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 20) {
-                    bg.mapArray[row][col].weAreHere();
-                    System.out.println("YOU ARE AT " + bg.mapArray[row][col].getPosition().toString());
+                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 10 &&
+                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 10) {
+                    bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
+                    break;
                 }
             }
         }
 
+        System.out.println(bg.survivor.whereYouAt().getOverlayPos());
+        int j = bg.survivor.whereYouAt().getOverlayX();
+        int i = bg.survivor.whereYouAt().getOverlayY();
+
         // basic movement
-//        if (input.isKeyDown(Input.KEY_D)) {
-//            bg.survivor.translate(5,0);
-//        }
-//        if (input.isKeyDown(Input.KEY_A)) {
-//            bg.survivor.translate(-5,0);
-//        }
-        if (input.isKeyDown(Input.KEY_S)) {
+        if (input.isKeyDown(Input.KEY_D) && bg.overlay[i][j+1].compareTo("X") != 0) {
+            bg.survivor.translate(5,0);
+        }
+        if (input.isKeyDown(Input.KEY_A) && bg.overlay[i][j-1].compareTo("X") != 0) {
+            bg.survivor.translate(-5,0);
+        }
+        if (input.isKeyDown(Input.KEY_S) && bg.overlay[i+1][j].compareTo("X") != 0) {
             bg.survivor.translate(0,5);
         }
-        if (input.isKeyDown(Input.KEY_W)) {
+        if (input.isKeyDown(Input.KEY_W) && bg.overlay[i-1][j].compareTo("X") != 0) {
             bg.survivor.translate(0,-5);
         }
 

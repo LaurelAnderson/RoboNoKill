@@ -1,6 +1,7 @@
 import jig.Entity;
 import jig.ResourceManager;
 
+import jig.Vector;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -71,6 +72,8 @@ public class MainGame extends StateBasedGame {
         mapArray = new Tile[rows][cols];
         overlay = new String[rows][cols];
 
+        Vector overlayPos;
+
         while(sc.hasNextLine()) {
             for (int i = 0; i < overlay.length; i++) {
                 String[] line = sc.nextLine().trim().split(" ");
@@ -81,12 +84,18 @@ public class MainGame extends StateBasedGame {
                     }else {
                         mapArray[i][j] = new Tile(x,y,false);
                     }
+                    mapArray[i][j].setOverlayPos(new Vector(j, i));
                     x += 40;
                 }
                 y += 40;
                 x = 40;
             }
         }
+
+        // testing
+//        for (int temp = 0; temp < 21; temp++ ){
+//            System.out.println(Arrays.toString(overlay[temp]));
+//        }
 
         survivor = new Survivor(440,480);
 
