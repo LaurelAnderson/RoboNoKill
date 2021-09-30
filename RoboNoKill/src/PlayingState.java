@@ -27,10 +27,8 @@ class PlayingState extends BasicGameState {
         // render all the walls of the map
         // still do not know if I want to do it this way yet
         for (int row = 0; row < bg.mapArray.length; row++) {
-           for (int col = 0; col < bg.mapArray[row].length; col++){
-               if (bg.mapArray[row][col] != null) {
-                   bg.mapArray[row][col].render(g);
-               }
+           for (int col = 0; col < bg.mapArray.length; col++){
+               bg.mapArray[row][col].render(g);
            }
         }
 
@@ -45,13 +43,29 @@ class PlayingState extends BasicGameState {
         Input input = container.getInput();
         MainGame bg = (MainGame)game;
 
+        // check where the player is
+        // double check that this is working or better way?
+        for (int row = 0; row < bg.mapArray.length; row++) {
+            for (int col = 0; col < bg.mapArray.length; col++){
+                if (bg.survivor.getX() == bg.mapArray[row][col].getX() &&
+                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 20 &&
+                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 20 ||
+                        bg.survivor.getY() == bg.mapArray[row][col].getY() &&
+                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 20 &&
+                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 20) {
+                    bg.mapArray[row][col].weAreHere();
+                    System.out.println("YOU ARE AT " + bg.mapArray[row][col].getPosition().toString());
+                }
+            }
+        }
+
         // basic movement
-        if (input.isKeyDown(Input.KEY_D)) {
-            bg.survivor.translate(5,0);
-        }
-        if (input.isKeyDown(Input.KEY_A)) {
-            bg.survivor.translate(-5,0);
-        }
+//        if (input.isKeyDown(Input.KEY_D)) {
+//            bg.survivor.translate(5,0);
+//        }
+//        if (input.isKeyDown(Input.KEY_A)) {
+//            bg.survivor.translate(-5,0);
+//        }
         if (input.isKeyDown(Input.KEY_S)) {
             bg.survivor.translate(0,5);
         }
