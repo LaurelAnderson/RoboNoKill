@@ -4,10 +4,12 @@ import jig.Vector;
 
 public class Tile extends Entity {
 
+    boolean isWall;
     private Vector overlayPos;
 
     public Tile(final float x, final float y, boolean isWall) {
         super(x, y);
+        this.isWall = isWall;
         if (isWall)
             addImageWithBoundingBox(ResourceManager
                     .getImage("Resource/walltest.png"));
@@ -22,6 +24,8 @@ public class Tile extends Entity {
 
     public int getOverlayX() { return (int)this.overlayPos.getX(); }
     public int getOverlayY() { return (int)this.overlayPos.getY(); }
+
+    public boolean getIsWall() { return this.isWall; }
 
     public void update(final int delta) {
     }

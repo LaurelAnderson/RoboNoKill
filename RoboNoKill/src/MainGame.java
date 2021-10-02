@@ -97,7 +97,7 @@ public class MainGame extends StateBasedGame {
 //            System.out.println(Arrays.toString(overlay[temp]));
 //        }
 
-        survivor = new Survivor(440,480);
+        survivor = new Survivor(440,480, mapArray[10][9]);
 
     }
 

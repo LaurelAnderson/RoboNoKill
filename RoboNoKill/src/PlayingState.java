@@ -46,35 +46,36 @@ class PlayingState extends BasicGameState {
         for (int row = 0; row < bg.mapArray.length; row++) {
             for (int col = 0; col < bg.mapArray.length; col++){
 
-                // create a helper for this
+                // create a helper for this - double check logic
                 if (bg.survivor.getX() == bg.mapArray[row][col].getX() &&
-                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 10 &&
-                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 10 ||
+                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 20 &&
+                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 20 ||
                         bg.survivor.getY() == bg.mapArray[row][col].getY() &&
-                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 10 &&
-                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 10) {
+                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 20 &&
+                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 20) {
                     bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
                     break;
                 }
             }
         }
 
-        System.out.println(bg.survivor.whereYouAt().getOverlayPos());
+//        System.out.println(bg.survivor.whereYouAt().getOverlayPos());
+        // get value of overlay where you currently are
         int j = bg.survivor.whereYouAt().getOverlayX();
         int i = bg.survivor.whereYouAt().getOverlayY();
 
         // basic movement
-        if (input.isKeyDown(Input.KEY_D) && bg.overlay[i][j+1].compareTo("X") != 0) {
-            bg.survivor.translate(5,0);
+        if (input.isKeyDown(Input.KEY_D)) {
+            bg.survivor.setMoving(new Vector(5,0), bg.mapArray[i][j+1]);
         }
-        if (input.isKeyDown(Input.KEY_A) && bg.overlay[i][j-1].compareTo("X") != 0) {
-            bg.survivor.translate(-5,0);
+        if (input.isKeyDown(Input.KEY_A)) {
+            bg.survivor.setMoving(new Vector(-5, 0), bg.mapArray[i][j-1]);
         }
-        if (input.isKeyDown(Input.KEY_S) && bg.overlay[i+1][j].compareTo("X") != 0) {
-            bg.survivor.translate(0,5);
+        if (input.isKeyDown(Input.KEY_S)) {
+            bg.survivor.setMoving(new Vector(0,5), bg.mapArray[i+1][j]);
         }
-        if (input.isKeyDown(Input.KEY_W) && bg.overlay[i-1][j].compareTo("X") != 0) {
-            bg.survivor.translate(0,-5);
+        if (input.isKeyDown(Input.KEY_W)) {
+            bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
         }
 
         bg.survivor.update(delta);
