@@ -19,23 +19,10 @@ class Survivor extends Entity {
     // keep track of where you are and which way you are going
     public void setMoving(Vector moving, Tile tile) {
 
-//        // if vector is opposite of last vector
-//        if (moving.add(this.moving).length() == 0) {
-//            // set value here
-//            this.moving = moving;
-//            System.out.println("DON'T CLIP " + moving.add(this.moving).length());
-//        }
+        // keep track of moves made
+        this.prevMove = this.moving;
+        this.moving = moving;
 
-        // if the new vector is different from the last
-//        if (this.moving.getX() != moving.getX() || this.moving.getY() != moving.getY()) {
-            this.prevMove = this.moving;
-            this.moving = moving;
-//            System.out.println("CLIP " + moving.add(this.moving).length());
-//            this.setPosition(this.where.getX(), this.where.getY());
-//        }
-
-        // at this point moving is set to current input
-        // grab components of where you are moving
         float moveX = moving.getX();
         float moveY = moving.getY();
 
@@ -57,13 +44,13 @@ class Survivor extends Entity {
                 this.translate(moving);
             }
 
-        } else if (this.moving.dot(this.prevMove) == 0) {
+        } else {
 
-            // position this entity more towards tile center for each input
-            this.setPosition(this.where.getX(), this.where.getY());
-            this.translate(moving);
-
-        }else {
+            // may be able to refine this slightly, but basic logic is alright
+            // check if you are moving to a perpendicular tile
+            if (this.moving.dot(this.prevMove) == 0) {
+                this.setPosition(this.where.getX(), this.where.getY());
+            }
             this.translate(moving);
         }
 

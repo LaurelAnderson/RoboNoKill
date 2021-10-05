@@ -42,39 +42,33 @@ class PlayingState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         // check where the player is
-        // double check that this is working or better way?
         for (int row = 0; row < bg.mapArray.length; row++) {
             for (int col = 0; col < bg.mapArray.length; col++){
-
-                // create a helper for this - double check logic
+                // check if survivor is on the tile
                 if (bg.survivor.getX() == bg.mapArray[row][col].getX() &&
-                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 20 &&
-                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 20 ||
+                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 10 &&
+                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 10 ||
                         bg.survivor.getY() == bg.mapArray[row][col].getY() &&
-                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 20 &&
-                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 20) {
+                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 10 &&
+                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 10) {
                     bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
                     break;
                 }
             }
         }
 
-//        System.out.println(bg.survivor.whereYouAt().getOverlayPos());
         // get value of overlay where you currently are
         int j = bg.survivor.whereYouAt().getOverlayX();
         int i = bg.survivor.whereYouAt().getOverlayY();
 
-        // basic movement
+        // basic movement can only click one at a time
         if (input.isKeyDown(Input.KEY_D)) {
             bg.survivor.setMoving(new Vector(5,0), bg.mapArray[i][j+1]);
-        }
-        if (input.isKeyDown(Input.KEY_A)) {
+        } else if (input.isKeyDown(Input.KEY_A)) {
             bg.survivor.setMoving(new Vector(-5, 0), bg.mapArray[i][j-1]);
-        }
-        if (input.isKeyDown(Input.KEY_S)) {
+        } else if (input.isKeyDown(Input.KEY_S)) {
             bg.survivor.setMoving(new Vector(0,5), bg.mapArray[i+1][j]);
-        }
-        if (input.isKeyDown(Input.KEY_W)) {
+        } else if (input.isKeyDown(Input.KEY_W)) {
             bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
         }
 
