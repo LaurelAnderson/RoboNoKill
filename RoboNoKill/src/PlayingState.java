@@ -1,3 +1,4 @@
+import jig.Vector;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -23,17 +24,12 @@ class PlayingState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         bg.survivor.render(g);
-
-        // render all the walls of the map
-        // still do not know if I want to do it this way yet
+        // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
-           for (int col = 0; col < bg.mapArray[row].length; col++){
-               if (bg.mapArray[row][col] != null) {
-                   bg.mapArray[row][col].render(g);
-               }
+           for (int col = 0; col < bg.mapArray.length; col++){
+               bg.mapArray[row][col].render(g);
            }
         }
-
 //        g.drawString("Bounces: " + bounces, 10, 30);
 
     }
@@ -45,18 +41,35 @@ class PlayingState extends BasicGameState {
         Input input = container.getInput();
         MainGame bg = (MainGame)game;
 
-        // basic movement
+        // check where the player is
+        for (int row = 0; row < bg.mapArray.length; row++) {
+            for (int col = 0; col < bg.mapArray.length; col++){
+                // check if survivor is on the tile
+                if (bg.survivor.getX() == bg.mapArray[row][col].getX() &&
+                        bg.survivor.getY() <= bg.mapArray[row][col].getY() + 10 &&
+                        bg.survivor.getY() > bg.mapArray[row][col].getY() - 10 ||
+                        bg.survivor.getY() == bg.mapArray[row][col].getY() &&
+                        bg.survivor.getX() <= bg.mapArray[row][col].getX() + 10 &&
+                        bg.survivor.getX() > bg.mapArray[row][col].getX() - 10) {
+                    bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
+                    break;
+                }
+            }
+        }
+
+        // get value of overlay where you currently are
+        int j = bg.survivor.whereYouAt().getOverlayX();
+        int i = bg.survivor.whereYouAt().getOverlayY();
+
+        // basic movement can only click one at a time
         if (input.isKeyDown(Input.KEY_D)) {
-            bg.survivor.translate(5,0);
-        }
-        if (input.isKeyDown(Input.KEY_A)) {
-            bg.survivor.translate(-5,0);
-        }
-        if (input.isKeyDown(Input.KEY_S)) {
-            bg.survivor.translate(0,5);
-        }
-        if (input.isKeyDown(Input.KEY_W)) {
-            bg.survivor.translate(0,-5);
+            bg.survivor.setMoving(new Vector(5,0), bg.mapArray[i][j+1]);
+        } else if (input.isKeyDown(Input.KEY_A)) {
+            bg.survivor.setMoving(new Vector(-5, 0), bg.mapArray[i][j-1]);
+        } else if (input.isKeyDown(Input.KEY_S)) {
+            bg.survivor.setMoving(new Vector(0,5), bg.mapArray[i+1][j]);
+        } else if (input.isKeyDown(Input.KEY_W)) {
+            bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
         }
 
         bg.survivor.update(delta);

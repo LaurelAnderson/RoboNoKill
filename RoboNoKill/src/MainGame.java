@@ -1,11 +1,13 @@
 import jig.Entity;
 import jig.ResourceManager;
 
+import jig.Vector;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.awt.desktop.SystemEventListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,13 +21,14 @@ public class MainGame extends StateBasedGame {
 
     public static final String TEST_PIC = "Resource/test.png";
     public static final String TEST_WALL = "Resource/walltest.png";
+    public static final String PATH_PIC = "Resource/path.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
 
     public final int ScreenWidth;
     public final int ScreenHeight;
 
-    Wall [][] mapArray;
+    Tile [][] mapArray;
     String [][] overlay;
 
     // level1 - 2d array
@@ -37,8 +40,9 @@ public class MainGame extends StateBasedGame {
         super(title);
         ScreenHeight = height;
         ScreenWidth = width;
-
+        Entity.setDebug(true);
         Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
+
     }
 
     @Override
@@ -49,7 +53,7 @@ public class MainGame extends StateBasedGame {
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
-
+        ResourceManager.loadImage(PATH_PIC);
 
         // create the array of walls
         // still do not know if I want to do it this way yet
@@ -65,25 +69,35 @@ public class MainGame extends StateBasedGame {
         int x = 40;
         int y = 120;
 
-        mapArray = new Wall[rows][cols];
+        mapArray = new Tile[rows][cols];
         overlay = new String[rows][cols];
+
+        Vector overlayPos;
 
         while(sc.hasNextLine()) {
             for (int i = 0; i < overlay.length; i++) {
                 String[] line = sc.nextLine().trim().split(" ");
                 for (int j = 0; j < line.length; j++) {
                     overlay[i][j] = line[j];
-                    if (overlay[i][j].compareTo("X") == 0) {
-                        mapArray[i][j] = new Wall(x,y);
+                    if (line[j].compareTo("X") == 0) {
+                        mapArray[i][j] = new Tile(x,y,true);
+                    }else {
+                        mapArray[i][j] = new Tile(x,y,false);
                     }
-                    y += 40;
+                    mapArray[i][j].setOverlayPos(new Vector(j, i));
+                    x += 40;
                 }
-                y = 120;
-                x += 40;
+                y += 40;
+                x = 40;
             }
         }
 
-        survivor = new Survivor(440,480);
+        // testing
+//        for (int temp = 0; temp < 21; temp++ ){
+//            System.out.println(Arrays.toString(overlay[temp]));
+//        }
+
+        survivor = new Survivor(440,480, mapArray[10][9]);
 
     }
 
