@@ -11,8 +11,7 @@ import java.awt.desktop.SystemEventListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainGame extends StateBasedGame {
 
@@ -72,7 +71,9 @@ public class MainGame extends StateBasedGame {
         mapArray = new Tile[rows][cols];
         overlay = new String[rows][cols];
 
-        Vector overlayPos;
+//        Vector overlayPos;
+
+        int key = 0;
 
         while(sc.hasNextLine()) {
             for (int i = 0; i < overlay.length; i++) {
@@ -80,12 +81,14 @@ public class MainGame extends StateBasedGame {
                 for (int j = 0; j < line.length; j++) {
                     overlay[i][j] = line[j];
                     if (line[j].compareTo("X") == 0) {
-                        mapArray[i][j] = new Tile(x,y,true);
+                        mapArray[i][j] = new Tile(x,y,true, key);
                     }else {
-                        mapArray[i][j] = new Tile(x,y,false);
+                        mapArray[i][j] = new Tile(x,y,false, key);
                     }
                     mapArray[i][j].setOverlayPos(new Vector(j, i));
+//                    System.out.println(mapArray[i][j].getPosition());
                     x += 40;
+                    key++;
                 }
                 y += 40;
                 x = 40;
@@ -94,7 +97,7 @@ public class MainGame extends StateBasedGame {
 
         // testing
 //        for (int temp = 0; temp < 21; temp++ ){
-//            System.out.println(Arrays.toString(overlay[temp]));
+////            System.out.println(Arrays.toString(overlay[temp]));
 //        }
 
         survivor = new Survivor(440,480, mapArray[10][9]);
