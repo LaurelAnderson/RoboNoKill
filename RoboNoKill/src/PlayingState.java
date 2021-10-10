@@ -65,6 +65,7 @@ class PlayingState extends BasicGameState {
         // check where the player is
         for (int row = 0; row < bg.mapArray.length; row++) {
             for (int col = 0; col < bg.mapArray.length; col++){
+
                 // check if survivor is on the tile
                 if (bg.survivor.getX() == bg.mapArray[row][col].getX() &&
                         bg.survivor.getY() <= bg.mapArray[row][col].getY() + 10 &&
@@ -75,8 +76,20 @@ class PlayingState extends BasicGameState {
                     // set were you were and where you are currently
                     bg.survivor.setWhereYouWere(bg.survivor.whereYouAt());
                     bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
-                    break;
                 }
+
+                // Check if a robot goes over a tile
+                if(bg.robot1.getX() == bg.mapArray[row][col].getX() &&
+                        bg.robot1.getY() == bg.mapArray[row][col].getY()) {
+//                    System.out.println("We are here " + bg.mapArray[row][col].getPosition());
+                    // testing
+                    if (bg.mapArray[row][col].getPi() == null) {
+                        bg.robot1.setDirection(new Vector(0,0));
+                    } else {
+                        bg.robot1.setDirection(bg.mapArray[row][col].getPi());
+                    }
+                }
+
             }
         }
 
@@ -122,7 +135,7 @@ class PlayingState extends BasicGameState {
         Tile start = bg.survivor.whereYouAt();
         unvisited.remove(start);
         start.g = 0;
-        start.setPi(null);
+//        start.setPi(new Vector(0,0));
         unvisited.add(start);
 
         while (unvisited.size() > 0) {
@@ -137,16 +150,16 @@ class PlayingState extends BasicGameState {
             int i = current.getOverlayY();
 
             if (!bg.mapArray[i][j + 1].getIsWall()) { // check left
-                relax(current, bg.mapArray[i][j + 1], new Vector(3,0));
+                relax(current, bg.mapArray[i][j + 1], new Vector(-1,0));
             }
             if (!bg.mapArray[i][j - 1].getIsWall()) { // check right
-                relax(current, bg.mapArray[i][j - 1], new Vector(-3, 0));
+                relax(current, bg.mapArray[i][j - 1], new Vector(1, 0));
             }
             if (!bg.mapArray[i + 1][j].getIsWall()) { // check down
-                relax(current, bg.mapArray[i + 1][j], new Vector(0,3));
+                relax(current, bg.mapArray[i + 1][j], new Vector(0,-1));
             }
             if (!bg.mapArray[i - 1][j].getIsWall()) { // check up
-                relax(current, bg.mapArray[i - 1][j], new Vector(0, -3));
+                relax(current, bg.mapArray[i - 1][j], new Vector(0, 1));
             }
 
             visited.put(current.key, current.g);
