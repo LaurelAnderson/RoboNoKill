@@ -33,6 +33,8 @@ class PlayingState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         bg.survivor.render(g);
+        bg.robot1.render(g);
+
         // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
            for (int col = 0; col < bg.mapArray.length; col++){
@@ -100,6 +102,7 @@ class PlayingState extends BasicGameState {
         }
 
         bg.survivor.update(delta);
+        bg.robot1.update(delta);
 
     }
 
