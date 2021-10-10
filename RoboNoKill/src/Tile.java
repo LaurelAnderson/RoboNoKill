@@ -8,7 +8,8 @@ public class Tile extends Entity {
     private final boolean isWall;
     private Vector overlayPos;
     final int key;
-    private Tile prevTile;
+//    private Tile prevTile;
+    private Vector pi;
 
     public Tile(final float x, final float y, boolean isWall, int key) {
         super(x, y);
@@ -30,8 +31,11 @@ public class Tile extends Entity {
     public int getOverlayX() { return Math.round(this.overlayPos.getX()); }
     public int getOverlayY() { return Math.round(this.overlayPos.getY()); }
 
-    public Tile getPrevTile() { return this.prevTile; }
-    public void setPrevTile(Tile prevTile) { this.prevTile = prevTile; }
+//    public Tile getPrevTile() { return this.prevTile; }
+//    public void setPrevTile(Tile prevTile) { this.prevTile = prevTile; }
+
+    public void setPi(Vector pi) { this.pi = pi; }
+    public Vector getPi() { return this.pi; }
 
     public boolean getIsWall() { return this.isWall; }
 

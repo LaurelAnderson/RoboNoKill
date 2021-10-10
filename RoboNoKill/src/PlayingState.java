@@ -119,31 +119,31 @@ class PlayingState extends BasicGameState {
         Tile start = bg.survivor.whereYouAt();
         unvisited.remove(start);
         start.g = 0;
-        start.setPrevTile(null);
+        start.setPi(null);
         unvisited.add(start);
 
         while (unvisited.size() > 0) {
 
             // get element with smallest g value off of heap
             Tile current = unvisited.remove();
-            if (current.g != 0) {
-                System.out.println(current.getPrevTile().g);
-            }
+//            if (current.g != 0) {
+//                System.out.println(current.getPrevTile().g);
+//            }
 
             int j = current.getOverlayX();
             int i = current.getOverlayY();
 
             if (!bg.mapArray[i][j + 1].getIsWall()) { // check left
-                relax(current, bg.mapArray[i][j + 1]);
+                relax(current, bg.mapArray[i][j + 1], new Vector(3,0));
             }
             if (!bg.mapArray[i][j - 1].getIsWall()) { // check right
-                relax(current, bg.mapArray[i][j - 1]);
+                relax(current, bg.mapArray[i][j - 1], new Vector(-3, 0));
             }
             if (!bg.mapArray[i + 1][j].getIsWall()) { // check down
-                relax(current, bg.mapArray[i + 1][j]);
+                relax(current, bg.mapArray[i + 1][j], new Vector(0,3));
             }
             if (!bg.mapArray[i - 1][j].getIsWall()) { // check up
-                relax(current, bg.mapArray[i - 1][j]);
+                relax(current, bg.mapArray[i - 1][j], new Vector(0, -3));
             }
 
             visited.put(current.key, current.g);
@@ -155,7 +155,7 @@ class PlayingState extends BasicGameState {
 
     }
 
-    public void relax(Tile current, Tile succ) {
+    public void relax(Tile current, Tile succ, Vector pi) {
 
         // Calculate cost for the successor
         int tempG = current.g + 1;
@@ -167,7 +167,8 @@ class PlayingState extends BasicGameState {
 
             unvisited.remove(succ);
             succ.g = tempG;
-            succ.setPrevTile(current);
+//            succ.setPrevTile(current);
+            succ.setPi(pi);
             unvisited.add(succ);
 
         }
