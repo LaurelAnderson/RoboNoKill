@@ -60,6 +60,7 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(TEST_WALL);
         ResourceManager.loadImage(PATH_PIC);
         ResourceManager.loadImage(ROBO_1_PIC);
+        ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
 
         // create the array of walls
         // still do not know if I want to do it this way yet
