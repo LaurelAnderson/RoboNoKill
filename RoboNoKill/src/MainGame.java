@@ -17,11 +17,14 @@ public class MainGame extends StateBasedGame {
 
     public static final int STARTUPSTATE = 0;
     public static final int PLAYINGSTATE = 1;
+    public static final int GAMEOVERSTATE = 2;
 
     public static final String TEST_PIC = "Resource/test.png";
     public static final String TEST_WALL = "Resource/walltest.png";
     public static final String PATH_PIC = "Resource/path.png";
     public static final String ROBO_1_PIC = "Resource/robot1.png";
+
+    public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
 
@@ -51,11 +54,13 @@ public class MainGame extends StateBasedGame {
 
         addState(new StartUpState());
         addState(new PlayingState());
+        addState(new GameOverState());
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
         ResourceManager.loadImage(PATH_PIC);
         ResourceManager.loadImage(ROBO_1_PIC);
+        ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
 
         // create the array of walls
         // still do not know if I want to do it this way yet
@@ -102,10 +107,6 @@ public class MainGame extends StateBasedGame {
 //        for (int temp = 0; temp < 21; temp++ ){
 ////            System.out.println(Arrays.toString(overlay[temp]));
 //        }
-
-        // change current tile to correct????
-        survivor = new Survivor(mapArray[9][10].getX(),mapArray[9][10].getY(), mapArray[10][10]);
-        robot1 = new Robot(mapArray[1][1].getX(), mapArray[1][1].getY(), mapArray[1][1]);
 
     }
 

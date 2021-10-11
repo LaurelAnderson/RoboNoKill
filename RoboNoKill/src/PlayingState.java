@@ -24,7 +24,14 @@ class PlayingState extends BasicGameState {
 
     @Override
     public void enter(GameContainer container, StateBasedGame game) {
+        MainGame bg = (MainGame)game;
+
         container.setSoundOn(true);
+
+        // change current tile to correct????
+        bg.survivor = new Survivor(bg.mapArray[9][10].getX(),bg.mapArray[9][10].getY(), bg.mapArray[10][10]);
+        bg.robot1 = new Robot(bg.mapArray[1][1].getX(), bg.mapArray[1][1].getY(), bg.mapArray[1][1]);
+
     }
 
     @Override
@@ -112,6 +119,11 @@ class PlayingState extends BasicGameState {
             bg.survivor.setMoving(new Vector(0,5), bg.mapArray[i+1][j]);
         } else if (input.isKeyDown(Input.KEY_W)) {
             bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
+        }
+
+        // Check if you need to enter the game over state
+        if (bg.robot1.collides(bg.survivor) != null) {
+            game.enterState(MainGame.GAMEOVERSTATE);
         }
 
         bg.survivor.update(delta);
