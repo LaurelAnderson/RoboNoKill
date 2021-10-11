@@ -11,8 +11,7 @@ import java.awt.desktop.SystemEventListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainGame extends StateBasedGame {
 
@@ -22,6 +21,7 @@ public class MainGame extends StateBasedGame {
     public static final String TEST_PIC = "Resource/test.png";
     public static final String TEST_WALL = "Resource/walltest.png";
     public static final String PATH_PIC = "Resource/path.png";
+    public static final String ROBO_1_PIC = "Resource/robot1.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
 
@@ -35,6 +35,7 @@ public class MainGame extends StateBasedGame {
     // level2 - 2d array
 
     Survivor survivor;
+    Robot robot1;
 
     public MainGame(String title, int width, int height) {
         super(title);
@@ -54,6 +55,7 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
         ResourceManager.loadImage(PATH_PIC);
+        ResourceManager.loadImage(ROBO_1_PIC);
 
         // create the array of walls
         // still do not know if I want to do it this way yet
@@ -72,7 +74,9 @@ public class MainGame extends StateBasedGame {
         mapArray = new Tile[rows][cols];
         overlay = new String[rows][cols];
 
-        Vector overlayPos;
+//        Vector overlayPos;
+
+        int key = 0;
 
         while(sc.hasNextLine()) {
             for (int i = 0; i < overlay.length; i++) {
@@ -80,12 +84,14 @@ public class MainGame extends StateBasedGame {
                 for (int j = 0; j < line.length; j++) {
                     overlay[i][j] = line[j];
                     if (line[j].compareTo("X") == 0) {
-                        mapArray[i][j] = new Tile(x,y,true);
+                        mapArray[i][j] = new Tile(x,y,true, key);
                     }else {
-                        mapArray[i][j] = new Tile(x,y,false);
+                        mapArray[i][j] = new Tile(x,y,false, key);
                     }
                     mapArray[i][j].setOverlayPos(new Vector(j, i));
+//                    System.out.println(mapArray[i][j].getPosition());
                     x += 40;
+                    key++;
                 }
                 y += 40;
                 x = 40;
@@ -94,10 +100,12 @@ public class MainGame extends StateBasedGame {
 
         // testing
 //        for (int temp = 0; temp < 21; temp++ ){
-//            System.out.println(Arrays.toString(overlay[temp]));
+////            System.out.println(Arrays.toString(overlay[temp]));
 //        }
 
-        survivor = new Survivor(440,480, mapArray[10][9]);
+        // change current tile to correct????
+        survivor = new Survivor(mapArray[9][10].getX(),mapArray[9][10].getY(), mapArray[10][10]);
+        robot1 = new Robot(mapArray[1][1].getX(), mapArray[1][1].getY(), mapArray[1][1]);
 
     }
 

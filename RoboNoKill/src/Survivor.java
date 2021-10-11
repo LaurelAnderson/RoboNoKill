@@ -4,8 +4,9 @@ import jig.Vector;
 
 class Survivor extends Entity {
 
-    Tile where;
-    Vector moving, prevMove;
+    Tile where, prevWhere;
+    Vector moving;
+    Vector prevMove;
 
     public Survivor(final float x, final float y, Tile start) {
         super(x, y);
@@ -27,7 +28,7 @@ class Survivor extends Entity {
         float moveY = moving.getY();
 
         // check if there could be a collision where you are going
-        if (tile.getIsWall() == true) {
+        if (tile.getIsWall()) {
 
 //            System.out.println(moveX + " " + moveY);
 
@@ -61,6 +62,9 @@ class Survivor extends Entity {
 
     public void setWhereYouAt(Tile tile) { this.where = tile; }
     public Tile whereYouAt() { return this.where; }
+
+    public void setWhereYouWere(Tile prevWhere) { this.prevWhere = prevWhere; }
+    public Tile getPrevWhere() { return this.prevWhere; }
 
     public void update(final int delta) {
     }
