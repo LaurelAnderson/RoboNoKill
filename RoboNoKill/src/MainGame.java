@@ -23,6 +23,8 @@ public class MainGame extends StateBasedGame {
     public static final String TEST_WALL = "Resource/walltest.png";
     public static final String PATH_PIC = "Resource/path.png";
     public static final String ROBO_1_PIC = "Resource/robot1.png";
+    public static final String ROBO_2_PIC = "Resource/robot2.png";
+    public static final String ROBO_3_PIC = "Resource/robot3.png";
 
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
 
@@ -34,11 +36,13 @@ public class MainGame extends StateBasedGame {
     Tile [][] mapArray;
     String [][] overlay;
 
+    Tile [] startingPos;
+
     // level1 - 2d array
     // level2 - 2d array
 
     Survivor survivor;
-    Robot robot1;
+    Robot [] robots = new Robot[3];
 
     public MainGame(String title, int width, int height) {
         super(title);
@@ -60,6 +64,8 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(TEST_WALL);
         ResourceManager.loadImage(PATH_PIC);
         ResourceManager.loadImage(ROBO_1_PIC);
+        ResourceManager.loadImage(ROBO_2_PIC);
+        ResourceManager.loadImage(ROBO_3_PIC);
         ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
 
         // create the array of walls
@@ -102,6 +108,9 @@ public class MainGame extends StateBasedGame {
                 x = 40;
             }
         }
+
+        // init starting positions, survivor, robot1, robot2, robot3
+        startingPos = new Tile[]{mapArray[10][10], mapArray[1][1], mapArray[1][19], mapArray[19][1]};
 
         // testing
 //        for (int temp = 0; temp < 21; temp++ ){
