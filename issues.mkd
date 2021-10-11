@@ -3,10 +3,10 @@
     - **[2]** Implement confined movement
     - **[3]** Add a basic robot with pathfinding
     - **[4]** Make it so the robot can catch the survivor
+    - **[5]** Add 2 other robots
 
 ## Open Issues ##
 
-    - **[5]** Add 2 other robots
     - **[6]** Develop collision detection
     - **[7]** basic chasing conditions applied for each robot
     - **[8]** develop the power-up

@@ -30,7 +30,12 @@ class PlayingState extends BasicGameState {
 
         // change current tile to correct????
         bg.survivor = new Survivor(bg.mapArray[9][10].getX(),bg.mapArray[9][10].getY(), bg.mapArray[10][10]);
-        bg.robot1 = new Robot(bg.mapArray[1][1].getX(), bg.mapArray[1][1].getY(), bg.mapArray[1][1]);
+
+        // init each of the robots
+        for (int i = 0; i < 3; i++) {
+            bg.robots[i] = new Robot(bg.startingPos[i+1].getX(), bg.startingPos[i+1].getY(),
+                    bg.startingPos[i+1], i+1);
+        }
 
     }
 
@@ -40,7 +45,10 @@ class PlayingState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         bg.survivor.render(g);
-        bg.robot1.render(g);
+
+        for (int robot = 0; robot < 3; robot++) {
+            bg.robots[robot].render(g);
+        }
 
         // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
@@ -85,18 +93,16 @@ class PlayingState extends BasicGameState {
                     bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
                 }
 
-                // Check if a robot goes over a tile
-                if(bg.robot1.getX() == bg.mapArray[row][col].getX() &&
-                        bg.robot1.getY() == bg.mapArray[row][col].getY()) {
-//                    System.out.println("We are here " + bg.mapArray[row][col].getPosition());
-                    // testing
-                    if (bg.mapArray[row][col].getPi() == null) {
-                        bg.robot1.setDirection(new Vector(0,0));
-                    } else {
-                        bg.robot1.setDirection(bg.mapArray[row][col].getPi());
+                // check if any of the robots are on a tile
+                for (int robot = 0; robot < 3; robot++) {
+                    if(bg.robots[robot].getX() == bg.mapArray[row][col].getX() &&
+                            bg.robots[robot].getY() == bg.mapArray[row][col].getY()) {
+                        if (bg.mapArray[row][col].getPi() == null) {
+                            bg.robots[robot].setDirection(new Vector(0,0));
+                        } else
+                            bg.robots[robot].setDirection(bg.mapArray[row][col].getPi());
                     }
                 }
-
             }
         }
 
@@ -121,13 +127,15 @@ class PlayingState extends BasicGameState {
             bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
         }
 
-        // Check if you need to enter the game over state
-        if (bg.robot1.collides(bg.survivor) != null) {
-            game.enterState(MainGame.GAMEOVERSTATE);
-        }
-
+        // update survivor
         bg.survivor.update(delta);
-        bg.robot1.update(delta);
+
+        // update the robots and check if you need to enter a game over state
+        for (int robot = 0; robot < 3; robot++) {
+            if (bg.robots[robot].collides(bg.survivor) != null)
+                game.enterState(MainGame.GAMEOVERSTATE);
+            bg.robots[robot].update(delta);
+        }
 
     }
 
