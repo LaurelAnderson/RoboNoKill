@@ -36,7 +36,7 @@ class StartUpState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         if (input.isKeyDown(Input.KEY_SPACE))
-            bg.enterState(MainGame.PLAYINGSTATE);
+            bg.enterState(MainGame.LEVEL1STATE);
 
     }
 
