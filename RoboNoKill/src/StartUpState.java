@@ -1,5 +1,6 @@
 import java.util.Iterator;
 
+import com.sun.tools.javac.Main;
 import jig.ResourceManager;
 
 import org.newdawn.slick.GameContainer;
@@ -36,7 +37,11 @@ class StartUpState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         if (input.isKeyDown(Input.KEY_SPACE))
-            bg.enterState(MainGame.PLAYINGSTATE);
+            bg.enterState(MainGame.LEVEL1STATE);
+
+        // testing
+        if (input.isKeyDown(Input.KEY_2))
+            bg.enterState(MainGame.LEVEL2STATE);
 
     }
 

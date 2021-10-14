@@ -18,6 +18,8 @@ public class MainGame extends StateBasedGame {
     public static final int STARTUPSTATE = 0;
     public static final int PLAYINGSTATE = 1;
     public static final int GAMEOVERSTATE = 2;
+    public static final int LEVEL1STATE = 3;
+    public static final int LEVEL2STATE = 4;
 
     public static final String TEST_PIC = "Resource/test.png";
     public static final String TEST_WALL = "Resource/walltest.png";
@@ -29,6 +31,7 @@ public class MainGame extends StateBasedGame {
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
+    public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
 
     public final int ScreenWidth;
     public final int ScreenHeight;
@@ -59,6 +62,8 @@ public class MainGame extends StateBasedGame {
         addState(new StartUpState());
         addState(new PlayingState());
         addState(new GameOverState());
+        addState(new Level1());
+        addState(new Level2());
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
@@ -70,47 +75,9 @@ public class MainGame extends StateBasedGame {
 
         // create the array of walls
         // still do not know if I want to do it this way yet
-        Scanner sc = null;
-        try {
-            sc = new Scanner(new BufferedReader(new FileReader(TEST_TXT)));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//
 
-        int rows = 21;
-        int cols = 21;
-        int x = 40;
-        int y = 120;
 
-        mapArray = new Tile[rows][cols];
-        overlay = new String[rows][cols];
-
-//        Vector overlayPos;
-
-        int key = 0;
-
-        while(sc.hasNextLine()) {
-            for (int i = 0; i < overlay.length; i++) {
-                String[] line = sc.nextLine().trim().split(" ");
-                for (int j = 0; j < line.length; j++) {
-                    overlay[i][j] = line[j];
-                    if (line[j].compareTo("X") == 0) {
-                        mapArray[i][j] = new Tile(x,y,true, key);
-                    }else {
-                        mapArray[i][j] = new Tile(x,y,false, key);
-                    }
-                    mapArray[i][j].setOverlayPos(new Vector(j, i));
-//                    System.out.println(mapArray[i][j].getPosition());
-                    x += 40;
-                    key++;
-                }
-                y += 40;
-                x = 40;
-            }
-        }
-
-        // init starting positions, survivor, robot1, robot2, robot3
-        startingPos = new Tile[]{mapArray[10][10], mapArray[1][1], mapArray[1][19], mapArray[19][1]};
 
         // testing
 //        for (int temp = 0; temp < 21; temp++ ){

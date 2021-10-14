@@ -22,22 +22,22 @@ class PlayingState extends BasicGameState {
             throws SlickException {
     }
 
-    @Override
-    public void enter(GameContainer container, StateBasedGame game) {
-        MainGame bg = (MainGame)game;
-
-        container.setSoundOn(true);
-
-        // change current tile to correct????
-        bg.survivor = new Survivor(bg.mapArray[9][10].getX(),bg.mapArray[9][10].getY(), bg.mapArray[10][10]);
-
-        // init each of the robots
-        for (int i = 0; i < 3; i++) {
-            bg.robots[i] = new Robot(bg.startingPos[i+1].getX(), bg.startingPos[i+1].getY(),
-                    bg.startingPos[i+1], i+1);
-        }
-
-    }
+//    @Override
+//    public void enter(GameContainer container, StateBasedGame game) {
+//        MainGame bg = (MainGame)game;
+//
+//        container.setSoundOn(true);
+//
+//        // change current tile to correct????
+//        bg.survivor = new Survivor(bg.mapArray[9][10].getX(),bg.mapArray[9][10].getY(), bg.mapArray[10][10]);
+//
+//        // init each of the robots
+//        for (int i = 0; i < 3; i++) {
+//            bg.robots[i] = new Robot(bg.startingPos[i+1].getX(), bg.startingPos[i+1].getY(),
+//                    bg.startingPos[i+1], i+1);
+//        }
+//
+//    }
 
     @Override
     public void render(GameContainer container, StateBasedGame game,
