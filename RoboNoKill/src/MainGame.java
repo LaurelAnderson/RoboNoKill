@@ -30,7 +30,7 @@ public class MainGame extends StateBasedGame {
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
-
+    public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
 
     public final int ScreenWidth;
     public final int ScreenHeight;

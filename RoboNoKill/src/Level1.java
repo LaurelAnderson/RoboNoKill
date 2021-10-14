@@ -31,7 +31,7 @@ public class Level1 extends PlayingState {
 
         Scanner sc = null;
         try {
-            sc = new Scanner(new BufferedReader(new FileReader(bg.TEST_TXT)));
+            sc = new Scanner(new BufferedReader(new FileReader(bg.TEST2_TXT)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
