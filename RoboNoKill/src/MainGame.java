@@ -19,6 +19,7 @@ public class MainGame extends StateBasedGame {
     public static final int PLAYINGSTATE = 1;
     public static final int GAMEOVERSTATE = 2;
     public static final int LEVEL1STATE = 3;
+    public static final int LEVEL2STATE = 4;
 
     public static final String TEST_PIC = "Resource/test.png";
     public static final String TEST_WALL = "Resource/walltest.png";
@@ -62,6 +63,7 @@ public class MainGame extends StateBasedGame {
         addState(new PlayingState());
         addState(new GameOverState());
         addState(new Level1());
+        addState(new Level2());
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);

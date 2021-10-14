@@ -16,7 +16,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class Level1 extends PlayingState {
+public class Level2 extends PlayingState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game)
@@ -31,7 +31,7 @@ public class Level1 extends PlayingState {
 
         Scanner sc = null;
         try {
-            sc = new Scanner(new BufferedReader(new FileReader(bg.TEST_TXT)));
+            sc = new Scanner(new BufferedReader(new FileReader(bg.TEST2_TXT)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -85,7 +85,7 @@ public class Level1 extends PlayingState {
 
     @Override
     public int getID() {
-        return MainGame.LEVEL1STATE;
+        return MainGame.LEVEL2STATE;
     }
 
 }
