@@ -22,27 +22,12 @@ class PlayingState extends BasicGameState {
             throws SlickException {
     }
 
-//    @Override
-//    public void enter(GameContainer container, StateBasedGame game) {
-//        MainGame bg = (MainGame)game;
-//
-//        container.setSoundOn(true);
-//
-//        // change current tile to correct????
-//        bg.survivor = new Survivor(bg.mapArray[9][10].getX(),bg.mapArray[9][10].getY(), bg.mapArray[10][10]);
-//
-//        // init each of the robots
-//        for (int i = 0; i < 3; i++) {
-//            bg.robots[i] = new Robot(bg.startingPos[i+1].getX(), bg.startingPos[i+1].getY(),
-//                    bg.startingPos[i+1], i+1);
-//        }
-//
-//    }
-
     @Override
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {
         MainGame bg = (MainGame)game;
+
+        int buffer = 125;
 
         bg.survivor.render(g);
 
@@ -53,6 +38,7 @@ class PlayingState extends BasicGameState {
         // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
            for (int col = 0; col < bg.mapArray.length; col++){
+
                bg.mapArray[row][col].render(g);
 
                // draw the cost of each tile to the screen
@@ -62,7 +48,13 @@ class PlayingState extends BasicGameState {
                }
            }
         }
-//        g.drawString("Bounces: " + bounces, 10, 30);
+
+        // draw the panel health to the screen
+        g.drawString("Panel Health: ",20, 75);
+        for (int i = 0; i < 3; i ++) {
+            g.drawString(" " + bg.panelHealth[i],20 + buffer, 75);
+            buffer += 70;
+        }
 
     }
 
@@ -110,6 +102,12 @@ class PlayingState extends BasicGameState {
         if (bg.survivor.getPrevWhere() != null && !checkTiles(bg.survivor.getPrevWhere(), bg.survivor.whereYouAt())) {
             // Dijkstra's Algo! Generate a filled map that can be turned off and on
             dijkstraAlgo(bg);
+        }
+
+        // check if we need to update the panel. If so, do it
+        if (bg.survivor.whereYouAt().getIsPanel() && input.isKeyDown(Input.KEY_W)) {
+//                System.out.println("This is a panel!");
+            bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.1f;
         }
 
         // get value of overlay where you currently are

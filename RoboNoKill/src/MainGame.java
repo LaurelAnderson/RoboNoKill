@@ -41,6 +41,7 @@ public class MainGame extends StateBasedGame {
     String [][] overlay;
 
     Tile [] startingPos;
+    float [] panelHealth = new float[3];
 
     Survivor survivor;
     Robot [] robots = new Robot[3];
