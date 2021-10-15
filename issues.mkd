@@ -4,6 +4,7 @@
     - **[3]** Add a basic robot with pathfinding
     - **[4]** Make it so the robot can catch the survivor
     - **[5]** Add 2 other robots
+    - **[13]** create a second level
 
 ## Open Issues ##
 
@@ -14,7 +15,6 @@
     - **[10]** simple sounds implemented
     - **[11]** set up menu
     - **[12]** set up winning state
-    - **[13]** create a second level
     - **[14]** Connect the UI and levels into a complete game
 
 ## Extra Stuff ##

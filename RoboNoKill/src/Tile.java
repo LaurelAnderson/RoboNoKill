@@ -8,17 +8,21 @@ public class Tile extends Entity {
     private final boolean isWall;
     private Vector overlayPos;
     final int key;
-//    private Tile prevTile;
     private Vector pi;
+    boolean isPanel;
 
-    public Tile(final float x, final float y, boolean isWall, int key) {
+    public Tile(final float x, final float y, boolean isWall, int key, boolean isPanel) {
         super(x, y);
         this.isWall = isWall;
         this.key = key;
-        if (isWall)
+        this.isPanel = isPanel;
+        if (isWall) {
             addImageWithBoundingBox(ResourceManager
                     .getImage("Resource/walltest.png"));
-        else {
+        } else if (isPanel) {
+            addImageWithBoundingBox(ResourceManager
+                    .getImage("Resource/panelPath.png"));
+        } else {
             addImageWithBoundingBox(ResourceManager
                     .getImage("Resource/path.png"));
         }
