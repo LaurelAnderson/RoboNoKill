@@ -24,10 +24,11 @@ public class MainGame extends StateBasedGame {
     public static final int CONTINUE = 6;
 
     public static final String TEST_PIC = "Resource/Survivor.png";
-    public static final String TEST_WALL = "Resource/walltest.png";
+    public static final String TEST_WALL = "Resource/Level1Block.png";
+    public static final String TEST_WALL2 = "Resource/Level2Block.png";
     public static final String PATH_PIC = "Resource/path.png";
     public static final String PANEL_PIC = "Resource/panelPath.png";
-    public static final String ROBO_1_PIC = "Resource/Robo1.png;";
+    public static final String ROBO_1_PIC = "Resource/Robo1.png";
     public static final String ROBO_2_PIC = "Resource/Robo2.png";
     public static final String ROBO_3_PIC = "Resource/Robo3.png";
 

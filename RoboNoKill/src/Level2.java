@@ -59,11 +59,11 @@ public class Level2 extends PlayingState {
                     bg.overlay[i][j] = line[j];
 
                     if (line[j].compareTo("X") == 0) {
-                        bg.mapArray[i][j] = new Tile(x,y,true, key,100);
+                        bg.mapArray[i][j] = new Tile(x,y,true, key,100, 2);
                     } else if (line[j].compareTo("0") == 0) {
-                        bg.mapArray[i][j] = new Tile(x,y,false, key,100);
+                        bg.mapArray[i][j] = new Tile(x,y,false, key,100, 2);
                     } else {
-                        bg.mapArray[i][j] = new Tile(x,y,false, key, whatPanel);
+                        bg.mapArray[i][j] = new Tile(x,y,false, key, whatPanel, 2);
                         whatPanel++;
                     }
 
