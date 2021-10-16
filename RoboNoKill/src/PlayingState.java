@@ -66,7 +66,7 @@ class PlayingState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         // look for the debug signal
-        if (input.isKeyPressed(Input.KEY_ESCAPE))
+        if (input.isKeyPressed(Input.KEY_LCONTROL))
             setDebug();
 
         // check where the player is
@@ -142,9 +142,14 @@ class PlayingState extends BasicGameState {
 
         // Check if you won the level
         if (bg.panelHealth[0] <= 0 && bg.panelHealth[1] <= 0 && bg.panelHealth[2] <= 0) {
-            game.enterState(MainGame.WINSTATE);
-        }
 
+            if (bg.getCurrentState().getID() == MainGame.LEVEL2STATE) {
+                game.enterState(MainGame.WINSTATE);
+            } else {
+                game.enterState(MainGame.CONTINUE);
+            }
+
+        }
     }
 
     public void dijkstraAlgo(MainGame bg) {
