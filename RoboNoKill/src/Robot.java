@@ -11,13 +11,13 @@ class Robot extends Entity {
         super(x, y);
         if (whatRobo == 1) {
             addImageWithBoundingBox(ResourceManager
-                    .getImage("Resource/robot1.png"));
+                    .getImage("Resource/Robo1.png"));
         } else if (whatRobo == 2) {
             addImageWithBoundingBox(ResourceManager
-                    .getImage("Resource/robot2.png"));
+                    .getImage("Resource/Robo2.png"));
         } else if (whatRobo == 3) {
             addImageWithBoundingBox(ResourceManager
-                    .getImage("Resource/robot3.png"));
+                    .getImage("Resource/Robo3.png"));
         }
         this.where = start;
     }

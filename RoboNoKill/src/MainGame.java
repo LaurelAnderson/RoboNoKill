@@ -23,13 +23,13 @@ public class MainGame extends StateBasedGame {
     public static final int WINSTATE = 5;
     public static final int CONTINUE = 6;
 
-    public static final String TEST_PIC = "Resource/test.png";
+    public static final String TEST_PIC = "Resource/Survivor.png";
     public static final String TEST_WALL = "Resource/walltest.png";
     public static final String PATH_PIC = "Resource/path.png";
     public static final String PANEL_PIC = "Resource/panelPath.png";
-    public static final String ROBO_1_PIC = "Resource/robot1.png";
-    public static final String ROBO_2_PIC = "Resource/robot2.png";
-    public static final String ROBO_3_PIC = "Resource/robot3.png";
+    public static final String ROBO_1_PIC = "Resource/Robo1.png;";
+    public static final String ROBO_2_PIC = "Resource/Robo2.png";
+    public static final String ROBO_3_PIC = "Resource/Robo3.png";
 
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
     public static final String WIN_BANNER_RSC = "Resource/Win.png";
@@ -54,7 +54,7 @@ public class MainGame extends StateBasedGame {
         super(title);
         ScreenHeight = height;
         ScreenWidth = width;
-        Entity.setDebug(true);
+//        Entity.setDebug(true);
         Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 
     }

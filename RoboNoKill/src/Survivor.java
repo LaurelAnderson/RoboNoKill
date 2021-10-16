@@ -11,7 +11,7 @@ class Survivor extends Entity {
     public Survivor(final float x, final float y, Tile start) {
         super(x, y);
         addImageWithBoundingBox(ResourceManager
-                .getImage("Resource/test.png"));
+                .getImage("Resource/Survivor.png"));
         this.moving = new Vector(0,0);
         this.setWhereYouAt(start);
 
