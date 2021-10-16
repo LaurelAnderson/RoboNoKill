@@ -27,7 +27,7 @@ class PlayingState extends BasicGameState {
                        Graphics g) throws SlickException {
         MainGame bg = (MainGame)game;
 
-        int buffer = 125;
+        int buffer = 120;
 
         bg.survivor.render(g);
 
@@ -52,8 +52,8 @@ class PlayingState extends BasicGameState {
         // draw the panel health to the screen
         g.drawString("Panel Health: ",20, 75);
         for (int i = 0; i < 3; i ++) {
-            g.drawString(" " + bg.panelHealth[i],20 + buffer, 75);
-            buffer += 70;
+            g.drawString(" " + Math.round(bg.panelHealth[i]),20 + buffer, 75);
+            buffer += 40;
         }
 
     }
@@ -106,8 +106,13 @@ class PlayingState extends BasicGameState {
 
         // check if we need to update the panel. If so, do it
         if (bg.survivor.whereYouAt().getIsPanel() && input.isKeyDown(Input.KEY_W)) {
-//                System.out.println("This is a panel!");
-            bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.1f;
+            if (bg.panelHealth[bg.survivor.whereYouAt().whatPanel] < 0) {
+                bg.panelHealth[bg.survivor.whereYouAt().whatPanel] = 0;
+//                bg.survivor.whereYouAt().healthGone = true;
+            } else {
+                bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.5f;
+            }
+
         }
 
         // get value of overlay where you currently are
@@ -160,9 +165,6 @@ class PlayingState extends BasicGameState {
 
             // get element with smallest g value off of heap
             Tile current = unvisited.remove();
-//            if (current.g != 0) {
-//                System.out.println(current.getPrevTile().g);
-//            }
 
             int j = current.getOverlayX();
             int i = current.getOverlayY();

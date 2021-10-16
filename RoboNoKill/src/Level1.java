@@ -46,7 +46,7 @@ public class Level1 extends PlayingState {
 
         // assign panel health
         for (int i = 0; i < 3; i++ ) {
-            bg.panelHealth[i] = 100;
+            bg.panelHealth[i] = 100.0d;
         }
 
         int key = 0;

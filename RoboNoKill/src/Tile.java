@@ -9,6 +9,8 @@ public class Tile extends Entity {
     private Vector overlayPos;
     final int key;
     private Vector pi;
+
+    boolean healthGone = false;
     boolean isPanel = false;
     int whatPanel;
 
@@ -47,10 +49,6 @@ public class Tile extends Entity {
     public int getWhichPanel() { return this.whatPanel; }
 
     public int getG() { return this.g; }
-
-//    public float getHealth() { return this.health; }
-//
-//    public void reduceHealth() { this.health =- 0.1f; }
 
     public void update(final int delta) { }
 }
