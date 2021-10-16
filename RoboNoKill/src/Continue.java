@@ -26,8 +26,14 @@ public class Continue extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {
 
-        g.drawImage(ResourceManager.getImage(MainGame.CONTINEUE_RSC), 0,
+        g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
                 0);
+
+        g.drawImage(ResourceManager.getImage(MainGame.CONTINEUE_RSC),150,
+                230);
+
+        g.drawString("Press SPACE to continue", 330, 500);
+        g.drawString("Press ESC to return to main menu", 290, 550);
 
     }
 
@@ -41,6 +47,7 @@ public class Continue extends BasicGameState {
             bg.enterState(MainGame.LEVEL2STATE);
         else if (input.isKeyDown(Input.KEY_ESCAPE))
             bg.enterState(MainGame.STARTUPSTATE);
+
     }
 
     @Override

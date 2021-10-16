@@ -59,7 +59,12 @@ class StartUpState extends BasicGameState {
         }
 
         if (input.isKeyDown(Input.KEY_SPACE))
-            bg.enterState(MainGame.LEVEL2STATE);
+            bg.enterState(MainGame.LEVEL1STATE);
+
+        // testing
+//        if (input.isKeyDown(Input.KEY_1)) {
+//            bg.enterState(MainGame.GAMEOVERSTATE);
+//        }
 
     }
 

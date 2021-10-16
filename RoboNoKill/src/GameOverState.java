@@ -30,10 +30,11 @@ class GameOverState extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {
 
-        MainGame bg = (MainGame)game;
-
-        g.drawImage(ResourceManager.getImage(MainGame.GAMEOVER_BANNER_RSC), 0,
+        g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
                 0);
+
+        g.drawImage(ResourceManager.getImage(MainGame.GAMEOVER_BANNER_RSC), 135,
+                230);
 
     }
 
@@ -43,7 +44,7 @@ class GameOverState extends BasicGameState {
 
         timer -= delta;
         if (timer <= 0)
-            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new FadeInTransition());
+            game.enterState(MainGame.STARTUPSTATE, new FadeOutTransition(), new FadeInTransition());
 
     }
 

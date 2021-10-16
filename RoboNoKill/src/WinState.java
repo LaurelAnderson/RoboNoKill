@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.HorizontalSplitTransition;
 
@@ -28,8 +29,11 @@ class WinState extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {
 
-        g.drawImage(ResourceManager.getImage(MainGame.WIN_BANNER_RSC), 0,
+        g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
                 0);
+
+        g.drawImage(ResourceManager.getImage(MainGame.WIN_BANNER_RSC), 150,
+                230);
 
     }
 
@@ -39,7 +43,7 @@ class WinState extends BasicGameState {
 
         timer -= delta;
         if (timer <= 0)
-            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new BlobbyTransition());
 
     }
 
