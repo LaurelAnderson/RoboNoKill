@@ -23,17 +23,21 @@ public class MainGame extends StateBasedGame {
     public static final int WINSTATE = 5;
     public static final int CONTINUE = 6;
 
-    public static final String TEST_PIC = "Resource/test.png";
-    public static final String TEST_WALL = "Resource/walltest.png";
+    public static final String TEST_PIC = "Resource/Survivor.png";
+    public static final String TEST_WALL = "Resource/Level1Block.png";
+    public static final String TEST_WALL2 = "Resource/Level2Block.png";
     public static final String PATH_PIC = "Resource/path.png";
     public static final String PANEL_PIC = "Resource/panelPath.png";
-    public static final String ROBO_1_PIC = "Resource/robot1.png";
-    public static final String ROBO_2_PIC = "Resource/robot2.png";
-    public static final String ROBO_3_PIC = "Resource/robot3.png";
+    public static final String ROBO_1_PIC = "Resource/Robo1.png";
+    public static final String ROBO_2_PIC = "Resource/Robo2.png";
+    public static final String ROBO_3_PIC = "Resource/Robo3.png";
 
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
     public static final String WIN_BANNER_RSC = "Resource/Win.png";
     public static final String CONTINEUE_RSC = "Resource/Continue.png";
+
+    public static final String BACKGROUND_RSC = "Resource/Background.png";
+    public static final String START_SCREEN_RSC = "Resource/StartScreen.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
     public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
@@ -54,7 +58,7 @@ public class MainGame extends StateBasedGame {
         super(title);
         ScreenHeight = height;
         ScreenWidth = width;
-        Entity.setDebug(true);
+//        Entity.setDebug(true);
         Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 
     }
@@ -72,6 +76,7 @@ public class MainGame extends StateBasedGame {
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
+        ResourceManager.loadImage(TEST_WALL2);
         ResourceManager.loadImage(PATH_PIC);
         ResourceManager.loadImage(PANEL_PIC);
         ResourceManager.loadImage(ROBO_1_PIC);
@@ -80,6 +85,8 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
         ResourceManager.loadImage(WIN_BANNER_RSC);
         ResourceManager.loadImage(CONTINEUE_RSC);
+        ResourceManager.loadImage(BACKGROUND_RSC);
+        ResourceManager.loadImage(START_SCREEN_RSC);
 
     }
 

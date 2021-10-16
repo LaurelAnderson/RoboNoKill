@@ -7,8 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.EmptyTransition;
-import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+import org.newdawn.slick.state.transition.*;
 
 class GameOverState extends BasicGameState {
 
@@ -31,10 +30,11 @@ class GameOverState extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {
 
-        MainGame bg = (MainGame)game;
-
-        g.drawImage(ResourceManager.getImage(MainGame.GAMEOVER_BANNER_RSC), 0,
+        g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
                 0);
+
+        g.drawImage(ResourceManager.getImage(MainGame.GAMEOVER_BANNER_RSC), 135,
+                230);
 
     }
 
@@ -44,7 +44,7 @@ class GameOverState extends BasicGameState {
 
         timer -= delta;
         if (timer <= 0)
-            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+            game.enterState(MainGame.STARTUPSTATE, new FadeOutTransition(), new FadeInTransition());
 
     }
 

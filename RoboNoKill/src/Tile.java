@@ -14,13 +14,21 @@ public class Tile extends Entity {
     boolean isPanel = false;
     int whatPanel;
 
-    public Tile(final float x, final float y, boolean isWall, int key, int whatPanel) {
+    public Tile(final float x, final float y, boolean isWall, int key, int whatPanel, int level) {
         super(x, y);
         this.isWall = isWall;
         this.key = key;
         if (isWall) {
-            addImageWithBoundingBox(ResourceManager
-                    .getImage("Resource/walltest.png"));
+
+            // check for which level
+            if (level == 1) {
+                addImageWithBoundingBox(ResourceManager
+                        .getImage("Resource/Level1Block.png"));
+            } else {
+                addImageWithBoundingBox(ResourceManager
+                        .getImage("Resource/Level2Block.png"));
+            }
+
         } else if (whatPanel != 100) {
 
             addImageWithBoundingBox(ResourceManager

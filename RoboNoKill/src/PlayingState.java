@@ -1,3 +1,4 @@
+import jig.ResourceManager;
 import jig.Vector;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -5,6 +6,10 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.BlobbyTransition;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+import org.newdawn.slick.state.transition.RotateTransition;
 
 import java.util.*;
 
@@ -27,8 +32,10 @@ class PlayingState extends BasicGameState {
                        Graphics g) throws SlickException {
         MainGame bg = (MainGame)game;
 
-        int buffer = 120;
+        g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
+                0);
 
+        int buffer = 120;
         bg.survivor.render(g);
 
         for (int robot = 0; robot < 3; robot++) {
@@ -136,7 +143,7 @@ class PlayingState extends BasicGameState {
         // update the robots and check if you need to enter a game over state
         for (int robot = 0; robot < 3; robot++) {
             if (bg.robots[robot].collides(bg.survivor) != null)
-                game.enterState(MainGame.GAMEOVERSTATE);
+                game.enterState(MainGame.GAMEOVERSTATE, new EmptyTransition(), new RotateTransition());
             bg.robots[robot].update(delta);
         }
 
