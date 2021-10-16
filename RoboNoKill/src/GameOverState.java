@@ -7,8 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.EmptyTransition;
-import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+import org.newdawn.slick.state.transition.*;
 
 class GameOverState extends BasicGameState {
 
@@ -44,7 +43,7 @@ class GameOverState extends BasicGameState {
 
         timer -= delta;
         if (timer <= 0)
-            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new FadeInTransition());
 
     }
 

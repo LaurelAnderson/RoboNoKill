@@ -43,7 +43,6 @@ class StartUpState extends BasicGameState {
             g.drawString("Press SPACE to start game", 330, 650);
 
         }
-
     }
 
     @Override
@@ -59,9 +58,8 @@ class StartUpState extends BasicGameState {
             timer = 700;
         }
 
-
         if (input.isKeyDown(Input.KEY_SPACE))
-            bg.enterState(MainGame.LEVEL1STATE);
+            bg.enterState(MainGame.LEVEL2STATE);
 
     }
 
