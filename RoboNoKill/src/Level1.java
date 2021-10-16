@@ -31,7 +31,7 @@ public class Level1 extends PlayingState {
 
         Scanner sc = null;
         try {
-            sc = new Scanner(new BufferedReader(new FileReader(bg.TEST_TXT)));
+            sc = new Scanner(new BufferedReader(new FileReader(MainGame.TEST_TXT)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -44,27 +44,38 @@ public class Level1 extends PlayingState {
         bg.mapArray = new Tile[rows][cols];
         bg.overlay = new String[rows][cols];
 
-//        Vector overlayPos;
+        // assign panel health
+        for (int i = 0; i < 3; i++ ) {
+            bg.panelHealth[i] = 100.0d;
+        }
 
         int key = 0;
+        int whatPanel = 0;
 
         while(sc.hasNextLine()) {
             for (int i = 0; i < bg.overlay.length; i++) {
                 String[] line = sc.nextLine().trim().split(" ");
                 for (int j = 0; j < line.length; j++) {
                     bg.overlay[i][j] = line[j];
+
                     if (line[j].compareTo("X") == 0) {
-                        bg.mapArray[i][j] = new Tile(x,y,true, key);
-                    }else {
-                        bg.mapArray[i][j] = new Tile(x,y,false, key);
+                        bg.mapArray[i][j] = new Tile(x,y,true, key,100);
+                    } else if (line[j].compareTo("0") == 0) {
+                        bg.mapArray[i][j] = new Tile(x,y,false, key,100);
+                    } else {
+                        bg.mapArray[i][j] = new Tile(x,y,false, key, whatPanel);
+                        whatPanel++;
                     }
+
                     bg.mapArray[i][j].setOverlayPos(new Vector(j, i));
-//                    System.out.println(mapArray[i][j].getPosition());
                     x += 40;
                     key++;
+
                 }
+
                 y += 40;
                 x = 40;
+
             }
         }
 

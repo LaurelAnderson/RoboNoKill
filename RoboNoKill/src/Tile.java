@@ -8,17 +8,27 @@ public class Tile extends Entity {
     private final boolean isWall;
     private Vector overlayPos;
     final int key;
-//    private Tile prevTile;
     private Vector pi;
 
-    public Tile(final float x, final float y, boolean isWall, int key) {
+    boolean healthGone = false;
+    boolean isPanel = false;
+    int whatPanel;
+
+    public Tile(final float x, final float y, boolean isWall, int key, int whatPanel) {
         super(x, y);
         this.isWall = isWall;
         this.key = key;
-        if (isWall)
+        if (isWall) {
             addImageWithBoundingBox(ResourceManager
                     .getImage("Resource/walltest.png"));
-        else {
+        } else if (whatPanel != 100) {
+
+            addImageWithBoundingBox(ResourceManager
+                    .getImage("Resource/panelPath.png"));
+            this.whatPanel = whatPanel;
+            this.isPanel = true;
+
+        } else {
             addImageWithBoundingBox(ResourceManager
                     .getImage("Resource/path.png"));
         }
@@ -31,16 +41,14 @@ public class Tile extends Entity {
     public int getOverlayX() { return Math.round(this.overlayPos.getX()); }
     public int getOverlayY() { return Math.round(this.overlayPos.getY()); }
 
-//    public Tile getPrevTile() { return this.prevTile; }
-//    public void setPrevTile(Tile prevTile) { this.prevTile = prevTile; }
-
     public void setPi(Vector pi) { this.pi = pi; }
     public Vector getPi() { return this.pi; }
 
     public boolean getIsWall() { return this.isWall; }
+    public boolean getIsPanel() { return this.isPanel; }
+    public int getWhichPanel() { return this.whatPanel; }
 
     public int getG() { return this.g; }
 
-    public void update(final int delta) {
-    }
+    public void update(final int delta) { }
 }

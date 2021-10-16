@@ -22,27 +22,12 @@ class PlayingState extends BasicGameState {
             throws SlickException {
     }
 
-//    @Override
-//    public void enter(GameContainer container, StateBasedGame game) {
-//        MainGame bg = (MainGame)game;
-//
-//        container.setSoundOn(true);
-//
-//        // change current tile to correct????
-//        bg.survivor = new Survivor(bg.mapArray[9][10].getX(),bg.mapArray[9][10].getY(), bg.mapArray[10][10]);
-//
-//        // init each of the robots
-//        for (int i = 0; i < 3; i++) {
-//            bg.robots[i] = new Robot(bg.startingPos[i+1].getX(), bg.startingPos[i+1].getY(),
-//                    bg.startingPos[i+1], i+1);
-//        }
-//
-//    }
-
     @Override
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {
         MainGame bg = (MainGame)game;
+
+        int buffer = 120;
 
         bg.survivor.render(g);
 
@@ -53,6 +38,7 @@ class PlayingState extends BasicGameState {
         // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
            for (int col = 0; col < bg.mapArray.length; col++){
+
                bg.mapArray[row][col].render(g);
 
                // draw the cost of each tile to the screen
@@ -62,7 +48,13 @@ class PlayingState extends BasicGameState {
                }
            }
         }
-//        g.drawString("Bounces: " + bounces, 10, 30);
+
+        // draw the panel health to the screen
+        g.drawString("Panel Health: ",20, 75);
+        for (int i = 0; i < 3; i ++) {
+            g.drawString(" " + Math.round(bg.panelHealth[i]),20 + buffer, 75);
+            buffer += 40;
+        }
 
     }
 
@@ -112,6 +104,17 @@ class PlayingState extends BasicGameState {
             dijkstraAlgo(bg);
         }
 
+        // check if we need to update the panel. If so, do it
+        if (bg.survivor.whereYouAt().getIsPanel() && input.isKeyDown(Input.KEY_W)) {
+            if (bg.panelHealth[bg.survivor.whereYouAt().whatPanel] < 0) {
+                bg.panelHealth[bg.survivor.whereYouAt().whatPanel] = 0;
+//                bg.survivor.whereYouAt().healthGone = true;
+            } else {
+                bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.5f;
+            }
+
+        }
+
         // get value of overlay where you currently are
         int j = bg.survivor.whereYouAt().getOverlayX();
         int i = bg.survivor.whereYouAt().getOverlayY();
@@ -135,6 +138,11 @@ class PlayingState extends BasicGameState {
             if (bg.robots[robot].collides(bg.survivor) != null)
                 game.enterState(MainGame.GAMEOVERSTATE);
             bg.robots[robot].update(delta);
+        }
+
+        // Check if you won the level
+        if (bg.panelHealth[0] <= 0 && bg.panelHealth[1] <= 0 && bg.panelHealth[2] <= 0) {
+            game.enterState(MainGame.WINSTATE);
         }
 
     }
@@ -162,9 +170,6 @@ class PlayingState extends BasicGameState {
 
             // get element with smallest g value off of heap
             Tile current = unvisited.remove();
-//            if (current.g != 0) {
-//                System.out.println(current.getPrevTile().g);
-//            }
 
             int j = current.getOverlayX();
             int i = current.getOverlayY();
