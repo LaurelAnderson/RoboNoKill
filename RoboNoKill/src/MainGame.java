@@ -20,6 +20,7 @@ public class MainGame extends StateBasedGame {
     public static final int GAMEOVERSTATE = 2;
     public static final int LEVEL1STATE = 3;
     public static final int LEVEL2STATE = 4;
+    public static final int WINSTATE = 5;
 
     public static final String TEST_PIC = "Resource/test.png";
     public static final String TEST_WALL = "Resource/walltest.png";
@@ -30,6 +31,7 @@ public class MainGame extends StateBasedGame {
     public static final String ROBO_3_PIC = "Resource/robot3.png";
 
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
+    public static final String WIN_BANNER_RSC = "Resource/Win.png";
 
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
     public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
@@ -63,6 +65,7 @@ public class MainGame extends StateBasedGame {
         addState(new GameOverState());
         addState(new Level1());
         addState(new Level2());
+        addState(new WinState());
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
@@ -72,6 +75,7 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(ROBO_2_PIC);
         ResourceManager.loadImage(ROBO_3_PIC);
         ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
+        ResourceManager.loadImage(WIN_BANNER_RSC);
 
     }
 

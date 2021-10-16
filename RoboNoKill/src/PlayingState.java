@@ -140,6 +140,11 @@ class PlayingState extends BasicGameState {
             bg.robots[robot].update(delta);
         }
 
+        // Check if you won the level
+        if (bg.panelHealth[0] <= 0 && bg.panelHealth[1] <= 0 && bg.panelHealth[2] <= 0) {
+            game.enterState(MainGame.WINSTATE);
+        }
+
     }
 
     public void dijkstraAlgo(MainGame bg) {
