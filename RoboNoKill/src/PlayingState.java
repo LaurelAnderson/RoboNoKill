@@ -1,3 +1,4 @@
+import jig.ResourceManager;
 import jig.Vector;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -27,8 +28,10 @@ class PlayingState extends BasicGameState {
                        Graphics g) throws SlickException {
         MainGame bg = (MainGame)game;
 
-        int buffer = 120;
+        g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
+                0);
 
+        int buffer = 120;
         bg.survivor.render(g);
 
         for (int robot = 0; robot < 3; robot++) {

@@ -36,6 +36,9 @@ public class MainGame extends StateBasedGame {
     public static final String WIN_BANNER_RSC = "Resource/Win.png";
     public static final String CONTINEUE_RSC = "Resource/Continue.png";
 
+    public static final String BACKGROUND_RSC = "Resource/Background.png";
+    public static final String START_SCREEN_RSC = "Resource/StartScreen.png";
+
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
     public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
 
@@ -73,6 +76,7 @@ public class MainGame extends StateBasedGame {
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
+        ResourceManager.loadImage(TEST_WALL2);
         ResourceManager.loadImage(PATH_PIC);
         ResourceManager.loadImage(PANEL_PIC);
         ResourceManager.loadImage(ROBO_1_PIC);
@@ -81,6 +85,8 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
         ResourceManager.loadImage(WIN_BANNER_RSC);
         ResourceManager.loadImage(CONTINEUE_RSC);
+        ResourceManager.loadImage(BACKGROUND_RSC);
+        ResourceManager.loadImage(START_SCREEN_RSC);
 
     }
 
