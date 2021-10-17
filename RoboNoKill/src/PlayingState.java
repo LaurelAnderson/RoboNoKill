@@ -226,7 +226,6 @@ class PlayingState extends BasicGameState {
 
             unvisited.remove(succ);
             succ.g = tempG;
-//            succ.setPrevTile(current);
             succ.setPi(pi);
             unvisited.add(succ);
 
