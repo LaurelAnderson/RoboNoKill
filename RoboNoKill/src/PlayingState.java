@@ -38,6 +38,10 @@ class PlayingState extends BasicGameState {
         int buffer = 120;
         bg.survivor.render(g);
 
+        if (bg.bolt != null) {
+            bg.bolt.render(g);
+        }
+
         for (int robot = 0; robot < 3; robot++) {
             bg.robots[robot].render(g);
         }
@@ -108,6 +112,9 @@ class PlayingState extends BasicGameState {
 
                     }
                 }
+
+                // check if the bolt collides with any of the walls
+
             }
         }
 
@@ -121,7 +128,6 @@ class PlayingState extends BasicGameState {
         if (bg.survivor.whereYouAt().getIsPanel() && input.isKeyDown(Input.KEY_W)) {
             if (bg.panelHealth[bg.survivor.whereYouAt().whatPanel] < 0) {
                 bg.panelHealth[bg.survivor.whereYouAt().whatPanel] = 0;
-//                bg.survivor.whereYouAt().healthGone = true;
             } else {
                 bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.5f;
             }
@@ -143,8 +149,21 @@ class PlayingState extends BasicGameState {
             bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
         }
 
+        // fire a bolt!
+        if (input.isKeyPressed(Input.KEY_E)) {
+            System.out.println(bg.survivor.getMoving());
+            // launch the bolt according to the getMoving var
+            bg.bolt = new Bolt(bg.survivor.getX(), bg.survivor.getY(), bg.survivor.getMoving());
+        }
+
         // update survivor
         bg.survivor.update(delta);
+
+        // update bolt
+        if (bg.bolt != null) {
+            bg.bolt.update(delta);
+        }
+
 
         // update the robots and check if you need to enter a game over state
         for (int robot = 0; robot < 3; robot++) {
