@@ -8,11 +8,11 @@
     - **[12]** set up winning state
     - **[11]** set up menu
     - **[9]** simple visuals added (characters/UI)
+    - **[7]** basic chasing conditions applied for each robot
 
 ## Open Issues ##
 
     - **[6]** Develop collision detection
-    - **[7]** basic chasing conditions applied for each robot
     - **[8]** develop the power-up
     - **[10]** simple sounds implemented
     - **[14]** Connect the UI and levels into a complete game
