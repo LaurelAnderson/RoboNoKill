@@ -98,22 +98,20 @@ class PlayingState extends BasicGameState {
 
                 // check if any of the robots are on a tile
                 for (int robot = 0; robot < 3; robot++) {
-
                     if(bg.robots[robot].getX() == bg.mapArray[row][col].getX() &&
                             bg.robots[robot].getY() == bg.mapArray[row][col].getY()) {
-
                         if (bg.mapArray[row][col].getPi() == null) {
                             bg.robots[robot].setDirection(new Vector(0,0));
                         } else
-
-                            // I think this is where I need to add stuff
-//                            bg.robots[robot].setDirection(bg.mapArray[row][col].getPi());
                             bg.robots[robot].checkRoboState(bg.mapArray[row][col], bg.mapArray);
-
                     }
                 }
 
                 // check if the bolt collides with any of the walls
+                if (bg.bolt != null && bg.mapArray[row][col].getIsWall() &&
+                        bg.bolt.collides(bg.mapArray[row][col]) != null) {
+                    bg.bolt = null;
+                }
 
             }
         }
@@ -163,7 +161,6 @@ class PlayingState extends BasicGameState {
         if (bg.bolt != null) {
             bg.bolt.update(delta);
         }
-
 
         // update the robots and check if you need to enter a game over state
         for (int robot = 0; robot < 3; robot++) {
