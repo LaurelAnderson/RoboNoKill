@@ -58,7 +58,6 @@ public class MainGame extends StateBasedGame {
         super(title);
         ScreenHeight = height;
         ScreenWidth = width;
-//        Entity.setDebug(true);
         Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 
     }
