@@ -55,6 +55,12 @@ public class MainGame extends StateBasedGame {
     Survivor survivor;
     Robot [] robots = new Robot[3];
 
+    ArrayList<Bolt> pickupBolts;
+//    Bolt [] pickupBolts;
+
+    int boltNum;
+
+    // test
     Bolt bolt = null;
 
     public MainGame(String title, int width, int height) {

@@ -5,6 +5,7 @@ import jig.Vector;
 class Bolt extends Entity {
 
     Vector launch;
+    boolean pickedUp = false;
 
     public Bolt(final float x, final float y, Vector launch) {
         super(x, y);

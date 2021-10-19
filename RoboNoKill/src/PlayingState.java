@@ -36,12 +36,12 @@ class PlayingState extends BasicGameState {
                 0);
 
         int buffer = 120;
-        bg.survivor.render(g);
 
+        // render the entities
+        bg.survivor.render(g);
         if (bg.bolt != null) {
             bg.bolt.render(g);
         }
-
         for (int robot = 0; robot < 3; robot++) {
             bg.robots[robot].render(g);
         }
@@ -60,11 +60,20 @@ class PlayingState extends BasicGameState {
            }
         }
 
+        // draw the number of bolts you have
+        g.drawString("Bolts: ",20, 50);
+        g.drawString(Integer.toString(bg.boltNum), 80, 50);
+
         // draw the panel health to the screen
         g.drawString("Panel Health: ",20, 75);
         for (int i = 0; i < 3; i ++) {
             g.drawString(" " + Math.round(bg.panelHealth[i]),20 + buffer, 75);
             buffer += 40;
+        }
+
+        // testing
+        for (int i = 0; i < bg.pickupBolts.size(); i++) {
+            bg.pickupBolts.get(i).render(g);
         }
 
     }
@@ -96,8 +105,10 @@ class PlayingState extends BasicGameState {
                     bg.survivor.setWhereYouAt(bg.mapArray[row][col]);
                 }
 
-                // check if any of the robots are on a tile
+                // check robos
                 for (int robot = 0; robot < 3; robot++) {
+
+                    // check the tiles that the robos go through
                     if(bg.robots[robot].getX() == bg.mapArray[row][col].getX() &&
                             bg.robots[robot].getY() == bg.mapArray[row][col].getY()) {
                         if (bg.mapArray[row][col].getPi() == null) {
@@ -105,6 +116,18 @@ class PlayingState extends BasicGameState {
                         } else
                             bg.robots[robot].checkRoboState(bg.mapArray[row][col], bg.mapArray);
                     }
+
+                    // check if any of the robos collides with the survivor - or this
+                    if (bg.robots[robot].collides(bg.survivor) != null)
+                        game.enterState(MainGame.GAMEOVERSTATE, new EmptyTransition(), new RotateTransition());
+
+                    // check if any of the robos collides with the bolt - do not need to do this here
+                    if (bg.bolt != null && bg.robots[robot].collides(bg.bolt) != null) {
+                        bg.bolt = null;
+                        bg.robots[robot].setStunned();
+//                        bg.robots[robot].checkRoboState(bg.mapArray[row][col], bg.mapArray);
+                    }
+
                 }
 
                 // check if the bolt collides with any of the walls
@@ -112,7 +135,6 @@ class PlayingState extends BasicGameState {
                         bg.bolt.collides(bg.mapArray[row][col]) != null) {
                     bg.bolt = null;
                 }
-
             }
         }
 
@@ -122,6 +144,13 @@ class PlayingState extends BasicGameState {
             dijkstraAlgo(bg);
         }
 
+        // check if the survivor collides with any of the pickup bolts
+        for (int bolt = 0; bolt < bg.pickupBolts.size(); bolt++) {
+            if (bg.survivor.collides(bg.pickupBolts.get(bolt)) != null) {
+                bg.pickupBolts.remove(bolt);
+            }
+        }
+
         // check if we need to update the panel. If so, do it
         if (bg.survivor.whereYouAt().getIsPanel() && input.isKeyDown(Input.KEY_W)) {
             if (bg.panelHealth[bg.survivor.whereYouAt().whatPanel] < 0) {
@@ -129,7 +158,6 @@ class PlayingState extends BasicGameState {
             } else {
                 bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.5f;
             }
-
         }
 
         // get value of overlay where you currently are
@@ -162,23 +190,20 @@ class PlayingState extends BasicGameState {
             bg.bolt.update(delta);
         }
 
-        // update the robots and check if you need to enter a game over state
+        // update the robots
         for (int robot = 0; robot < 3; robot++) {
-            if (bg.robots[robot].collides(bg.survivor) != null)
-                game.enterState(MainGame.GAMEOVERSTATE, new EmptyTransition(), new RotateTransition());
             bg.robots[robot].update(delta);
         }
 
         // Check if you won the level
         if (bg.panelHealth[0] <= 0 && bg.panelHealth[1] <= 0 && bg.panelHealth[2] <= 0) {
-
             if (bg.getCurrentState().getID() == MainGame.LEVEL2STATE) {
                 game.enterState(MainGame.WINSTATE);
             } else {
                 game.enterState(MainGame.CONTINUE);
             }
-
         }
+
     }
 
     public void dijkstraAlgo(MainGame bg) {
