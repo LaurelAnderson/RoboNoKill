@@ -101,7 +101,6 @@ class Robot extends Entity {
 
     }
 
-
     public void update(final int delta) {
 
         this.timer -= delta;

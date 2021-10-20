@@ -56,7 +56,6 @@ public class MainGame extends StateBasedGame {
     Robot [] robots = new Robot[3];
 
     ArrayList<Bolt> pickupBolts;
-//    Bolt [] pickupBolts;
 
     int boltNum;
 
