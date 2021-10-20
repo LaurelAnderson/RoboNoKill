@@ -117,8 +117,8 @@ class PlayingState extends BasicGameState {
                             bg.robots[robot].checkRoboState(bg.mapArray[row][col], bg.mapArray);
                     }
 
-                    // check if any of the robos collides with the survivor - or this
-                    if (bg.robots[robot].collides(bg.survivor) != null)
+                    // check if any of the robos collides with the survivor while they are not stunned
+                    if (bg.robots[robot].collides(bg.survivor) != null && !bg.robots[robot].getStunned())
                         game.enterState(MainGame.GAMEOVERSTATE, new EmptyTransition(), new RotateTransition());
 
                     // check if any of the robos collides with the bolt - do not need to do this here
@@ -127,7 +127,6 @@ class PlayingState extends BasicGameState {
                         System.out.println("Robo " + bg.robots[robot].whatRobo + " got stunned" );
                         bg.robots[robot].stunnedLogic();
                     }
-
                 }
 
                 // check if the bolt collides with any of the walls
@@ -167,13 +166,13 @@ class PlayingState extends BasicGameState {
 
         // basic movement can only click one at a time
         if (input.isKeyDown(Input.KEY_D)) {
-            bg.survivor.setMoving(new Vector(5,0), bg.mapArray[i][j+1]);
+            bg.survivor.setMoving(new Vector(4,0), bg.mapArray[i][j+1]);
         } else if (input.isKeyDown(Input.KEY_A)) {
-            bg.survivor.setMoving(new Vector(-5, 0), bg.mapArray[i][j-1]);
+            bg.survivor.setMoving(new Vector(-4, 0), bg.mapArray[i][j-1]);
         } else if (input.isKeyDown(Input.KEY_S)) {
-            bg.survivor.setMoving(new Vector(0,5), bg.mapArray[i+1][j]);
+            bg.survivor.setMoving(new Vector(0,4), bg.mapArray[i+1][j]);
         } else if (input.isKeyDown(Input.KEY_W)) {
-            bg.survivor.setMoving(new Vector(0,-5), bg.mapArray[i-1][j]);
+            bg.survivor.setMoving(new Vector(0,-4), bg.mapArray[i-1][j]);
         }
 
         // fire a bolt!
@@ -223,7 +222,6 @@ class PlayingState extends BasicGameState {
         Tile start = bg.survivor.whereYouAt();
         unvisited.remove(start);
         start.g = 0;
-//        start.setPi(new Vector(0,0));
         unvisited.add(start);
 
         while (unvisited.size() > 0) {

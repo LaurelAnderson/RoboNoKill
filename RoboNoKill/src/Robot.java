@@ -41,6 +41,7 @@ class Robot extends Entity {
     public Vector getDirection() { return this.direction; }
 
     public void setStunned() { this.stunned = true; }
+    public boolean getStunned() { return this.stunned; }
 
     // check which robot this is, and update this.direction for which robot it is.
     public void checkRoboState(Tile current, Tile [][] mapArray) {
@@ -91,7 +92,7 @@ class Robot extends Entity {
         choice = (int)(Math.random()*(count-1+1)+1);
 
         // If you are going opposite direction that you were, re-roll.
-        if (canGo.get(choice).add(prevDir).getX() == 0 && canGo.get(choice).add(prevDir).getY() == 0 &&
+        while (canGo.get(choice).add(prevDir).getX() == 0 && canGo.get(choice).add(prevDir).getY() == 0 &&
                 canGo.size() > 1) {
             choice = (int)(Math.random()*(count-1+1)+1);
         }

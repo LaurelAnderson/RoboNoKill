@@ -32,7 +32,7 @@ public class Continue extends BasicGameState {
         g.drawImage(ResourceManager.getImage(MainGame.CONTINEUE_RSC),150,
                 230);
 
-        g.drawString("Press SPACE to continue", 330, 500);
+        g.drawString("Press SPACE to go to next level", 293, 500);
         g.drawString("Press ESC to return to main menu", 290, 550);
 
     }
@@ -43,9 +43,9 @@ public class Continue extends BasicGameState {
         Input input = container.getInput();
         MainGame bg = (MainGame)game;
 
-        if (input.isKeyDown(Input.KEY_SPACE))
+        if (input.isKeyPressed(Input.KEY_SPACE))
             bg.enterState(MainGame.LEVEL2STATE);
-        else if (input.isKeyDown(Input.KEY_ESCAPE))
+        else if (input.isKeyPressed(Input.KEY_ESCAPE))
             bg.enterState(MainGame.STARTUPSTATE);
 
     }
