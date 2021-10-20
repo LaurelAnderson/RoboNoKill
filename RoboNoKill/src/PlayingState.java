@@ -124,8 +124,8 @@ class PlayingState extends BasicGameState {
                     // check if any of the robos collides with the bolt - do not need to do this here
                     if (bg.bolt != null && bg.robots[robot].collides(bg.bolt) != null) {
                         bg.bolt = null;
-                        bg.robots[robot].setStunned();
-//                        bg.robots[robot].checkRoboState(bg.mapArray[row][col], bg.mapArray);
+                        System.out.println("Robo " + bg.robots[robot].whatRobo + " got stunned" );
+                        bg.robots[robot].stunnedLogic();
                     }
 
                 }
@@ -147,6 +147,7 @@ class PlayingState extends BasicGameState {
         // check if the survivor collides with any of the pickup bolts
         for (int bolt = 0; bolt < bg.pickupBolts.size(); bolt++) {
             if (bg.survivor.collides(bg.pickupBolts.get(bolt)) != null) {
+                bg.boltNum++;
                 bg.pickupBolts.remove(bolt);
             }
         }
@@ -176,10 +177,10 @@ class PlayingState extends BasicGameState {
         }
 
         // fire a bolt!
-        if (input.isKeyPressed(Input.KEY_E)) {
-            System.out.println(bg.survivor.getMoving());
+        if (input.isKeyPressed(Input.KEY_E) && bg.boltNum > 0) {
             // launch the bolt according to the getMoving var
             bg.bolt = new Bolt(bg.survivor.getX(), bg.survivor.getY(), bg.survivor.getMoving());
+            bg.boltNum--;
         }
 
         // update survivor

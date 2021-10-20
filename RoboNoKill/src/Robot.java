@@ -7,10 +7,13 @@ import java.util.Hashtable;
 class Robot extends Entity {
 
     private int minTime, maxTime;
+
     private Vector direction;
+    private Vector wasGoing;
     private Tile where;
-    private final int whatRobo;
-    private int timer;
+    final int whatRobo;
+    private int timer, stunTimer;
+    private boolean stalking;
     private boolean roaming;
     private boolean stunned;
 
@@ -47,6 +50,16 @@ class Robot extends Entity {
             this.setDirection(current.getPi());
         }
     }
+
+    public void stunnedLogic() {
+
+        this.stunned = true;
+        this.wasGoing = this.direction;
+        this.setDirection(new Vector(0,0));
+        this.stunTimer = 3500;
+
+    }
+
 
     // sets the roaming logic for the robot
     private void randomLogic(Tile current, Tile [][] mapArray) {
@@ -92,16 +105,20 @@ class Robot extends Entity {
     public void update(final int delta) {
 
         this.timer -= delta;
+        if (this.stunned) this.stunTimer -= delta;
 
-        if (this.stunned) {
-            translate(new Vector(0,0));
-
-        } else {
-            if (this.whatRobo != 1 && this.timer <= 0) {
-                this.roaming = !this.roaming;
-                this.timer = this.maxTime;
-            }
-            translate(this.direction);
+        if (this.stunned && this.stunTimer <= 0) {
+            System.out.println("We are done being stunned");
+            System.out.println("I want to go this way now " + this.wasGoing);
+            this.stunned = false;
+            this.setDirection(this.wasGoing);
         }
+
+        else if (this.whatRobo != 1 && this.timer <= 0) {
+            this.roaming = !this.roaming;
+            this.timer = this.maxTime;
+        }
+
+        translate(this.direction);
     }
 }
