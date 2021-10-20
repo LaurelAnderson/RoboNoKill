@@ -36,6 +36,9 @@ public class Level1 extends PlayingState {
             e.printStackTrace();
         }
 
+        // set the number of bolts you have
+        bg.boltNum = 0;
+
         int rows = 21;
         int cols = 21;
         int x = 40;
@@ -90,6 +93,12 @@ public class Level1 extends PlayingState {
             bg.robots[i] = new Robot(bg.startingPos[i+1].getX(), bg.startingPos[i+1].getY(),
                     bg.startingPos[i+1], i+1);
         }
+
+        // init the bolts
+        bg.pickupBolts = new ArrayList<>();
+        bg.pickupBolts.add(new Bolt(bg.mapArray[3][2].getX(),bg.mapArray[3][2].getY(), new Vector(0,0)));
+        bg.pickupBolts.add(new Bolt(bg.mapArray[19][9].getX(),bg.mapArray[19][9].getY(), new Vector(0,0)));
+        bg.pickupBolts.add(new Bolt(bg.mapArray[7][16].getX(),bg.mapArray[7][16].getY(), new Vector(0,0)));
 
     }
 

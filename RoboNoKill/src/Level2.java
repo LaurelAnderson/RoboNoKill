@@ -89,6 +89,12 @@ public class Level2 extends PlayingState {
                     bg.startingPos[i+1], i+1);
         }
 
+        // init the bolts
+        bg.pickupBolts = new ArrayList<>();
+        bg.pickupBolts.add(new Bolt(bg.mapArray[4][19].getX(),bg.mapArray[4][19].getY(), new Vector(0,0)));
+        bg.pickupBolts.add(new Bolt(bg.mapArray[6][3].getX(),bg.mapArray[6][3].getY(), new Vector(0,0)));
+        bg.pickupBolts.add(new Bolt(bg.mapArray[16][13].getX(),bg.mapArray[16][13].getY(), new Vector(0,0)));
+
     }
 
 

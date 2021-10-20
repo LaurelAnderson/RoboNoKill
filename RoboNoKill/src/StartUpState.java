@@ -20,6 +20,10 @@ class StartUpState extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
+
+        // start music in here
+        // have a playing check to see if you are playing
+
     }
 
     @Override
@@ -60,11 +64,6 @@ class StartUpState extends BasicGameState {
 
         if (input.isKeyDown(Input.KEY_SPACE))
             bg.enterState(MainGame.LEVEL1STATE);
-
-        // testing
-//        if (input.isKeyDown(Input.KEY_1)) {
-//            bg.enterState(MainGame.GAMEOVERSTATE);
-//        }
 
     }
 
