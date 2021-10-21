@@ -43,6 +43,9 @@ class PlayingState extends BasicGameState {
             bg.robots[robot].render(g);
         }
 
+        for (Bang b : bg.explosions)
+            b.render(g);
+
         // render all the tiles of the map
         for (int row = 0; row < bg.mapArray.length; row++) {
            for (int col = 0; col < bg.mapArray.length; col++){
@@ -124,8 +127,10 @@ class PlayingState extends BasicGameState {
                     }
                     // check if any of the robos collides with the bolt - do not need to do this here
                     if (bg.bolt != null && bg.robots[robot].collides(bg.bolt) != null) {
+                        // add an explosion
+                        bg.explosions.add(new Bang(bg.robots[robot].getX(), bg.robots[robot].getY()));
                         bg.bolt = null;
-                        ResourceManager.getSound(MainGame.HIT_SOUND_RSC).play();
+//                        ResourceManager.getSound(MainGame.HIT_SOUND_RSC).play();
                         bg.robots[robot].stunnedLogic();
                     }
                 }
@@ -196,6 +201,9 @@ class PlayingState extends BasicGameState {
         for (int robot = 0; robot < 3; robot++) {
             bg.robots[robot].update(delta);
         }
+
+        // check if there are any finished explosions, if so remove them
+        bg.explosions.removeIf(bang -> !bang.isActive());
 
         // Check if you won the level
         if (bg.panelHealth[0] <= 0 && bg.panelHealth[1] <= 0 && bg.panelHealth[2] <= 0) {

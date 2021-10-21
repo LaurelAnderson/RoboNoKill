@@ -22,8 +22,9 @@ class StartUpState extends BasicGameState {
         MainGame bg = (MainGame)game;
 
         // start music in here
-        container.setMusicVolume(0.3f);
+        container.setMusicVolume(0.8f);
         bg.tune = ResourceManager.getMusic(MainGame.MAIN_TUNE_RSC);
+//        bg.tune.setVolume(0.1f);
         bg.tune.loop();
 
     }
