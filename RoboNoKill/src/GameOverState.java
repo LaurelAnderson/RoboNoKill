@@ -23,9 +23,6 @@ class GameOverState extends BasicGameState {
         timer = 4000;
     }
 
-    public void setUserScore(int bounces) {
-    }
-
     @Override
     public void render(GameContainer container, StateBasedGame game,
                        Graphics g) throws SlickException {

@@ -10,11 +10,11 @@
     - **[9]** simple visuals added (characters/UI)
     - **[7]** basic chasing conditions applied for each robot
     - **[8]** develop the power-up
+    - **[10]** simple sounds implemented
 
 ## Open Issues ##
 
     - **[6]** Develop collision detection
-    - **[10]** simple sounds implemented
     - **[14]** Connect the UI and levels into a complete game
 
 ## Extra Stuff ##

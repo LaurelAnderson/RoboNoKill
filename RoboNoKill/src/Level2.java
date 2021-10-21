@@ -29,6 +29,8 @@ public class Level2 extends PlayingState {
 
         container.setSoundOn(true);
 
+        bg.boltNum = 0;
+
         Scanner sc = null;
         try {
             sc = new Scanner(new BufferedReader(new FileReader(MainGame.TEST2_TXT)));

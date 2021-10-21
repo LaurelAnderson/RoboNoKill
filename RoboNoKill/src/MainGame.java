@@ -4,6 +4,7 @@ import jig.ResourceManager;
 import jig.Vector;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -48,6 +49,10 @@ public class MainGame extends StateBasedGame {
 
     // sounds and music
     public static final String MAIN_TUNE_RSC = "Resource/Sound/404452__furbyguy__synthwave-loop.wav";
+    public static final String HIT_SOUND_RSC = "Resource/Sound/66918__mikemunkie__synthtomlow.wav";
+    public static final String BOLT_PICKUP = "Resource/Sound/411443__abbasgamez__powerup2.wav";
+    public static final String GAME_OVER_RSC = "Resource/Sound/415079__harrietniamh__video-game-death-sound-effect.wav";
+    public static final String WINNING_RSC = "Resource/Sound/518855__mrickey13__fight-win-tune.wav";
 
     public final int ScreenWidth;
     public final int ScreenHeight;
@@ -64,6 +69,8 @@ public class MainGame extends StateBasedGame {
     ArrayList<Bolt> pickupBolts;
 
     int boltNum;
+
+    Music tune;
 
     // test
     Bolt bolt = null;
@@ -103,6 +110,10 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(BOLT_PIC);
 
         ResourceManager.loadMusic(MAIN_TUNE_RSC);
+        ResourceManager.loadSound(HIT_SOUND_RSC);
+        ResourceManager.loadSound(BOLT_PICKUP);
+        ResourceManager.loadSound(GAME_OVER_RSC);
+        ResourceManager.loadSound(WINNING_RSC);
 
     }
 

@@ -13,17 +13,18 @@ class StartUpState extends BasicGameState {
 
     private int timer;
     boolean display = true;
+    Music tune;
 
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
 
-        // start music in here
-        container.setMusicVolume(0.6f);
-        Music newTune = ResourceManager.getMusic(MainGame.MAIN_TUNE_RSC);
-        newTune.loop();
+        MainGame bg = (MainGame)game;
 
-        // have a playing check to see if you are playing
+        // start music in here
+        container.setMusicVolume(0.3f);
+        bg.tune = ResourceManager.getMusic(MainGame.MAIN_TUNE_RSC);
+        bg.tune.loop();
 
     }
 
