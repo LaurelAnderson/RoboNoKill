@@ -3,10 +3,7 @@ import java.util.Iterator;
 import com.sun.tools.javac.Main;
 import jig.ResourceManager;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
@@ -16,13 +13,18 @@ class StartUpState extends BasicGameState {
 
     private int timer;
     boolean display = true;
+    Music tune;
 
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
 
+        MainGame bg = (MainGame)game;
+
         // start music in here
-        // have a playing check to see if you are playing
+        container.setMusicVolume(0.3f);
+        bg.tune = ResourceManager.getMusic(MainGame.MAIN_TUNE_RSC);
+        bg.tune.loop();
 
     }
 

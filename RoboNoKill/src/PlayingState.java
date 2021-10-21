@@ -6,10 +6,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.BlobbyTransition;
-import org.newdawn.slick.state.transition.EmptyTransition;
-import org.newdawn.slick.state.transition.HorizontalSplitTransition;
-import org.newdawn.slick.state.transition.RotateTransition;
+import org.newdawn.slick.state.transition.*;
 
 import java.util.*;
 
@@ -118,13 +115,17 @@ class PlayingState extends BasicGameState {
                     }
 
                     // check if any of the robos collides with the survivor while they are not stunned
-                    if (bg.robots[robot].collides(bg.survivor) != null && !bg.robots[robot].getStunned())
-                        game.enterState(MainGame.GAMEOVERSTATE, new EmptyTransition(), new RotateTransition());
+                    if (bg.robots[robot].collides(bg.survivor) != null && !bg.robots[robot].getStunned()) {
 
+                        if (!ResourceManager.getSound(MainGame.GAME_OVER_RSC).playing())
+                            ResourceManager.getSound(MainGame.GAME_OVER_RSC).play();
+
+                        game.enterState(MainGame.GAMEOVERSTATE, new EmptyTransition(), new RotateTransition());
+                    }
                     // check if any of the robos collides with the bolt - do not need to do this here
                     if (bg.bolt != null && bg.robots[robot].collides(bg.bolt) != null) {
                         bg.bolt = null;
-                        System.out.println("Robo " + bg.robots[robot].whatRobo + " got stunned" );
+                        ResourceManager.getSound(MainGame.HIT_SOUND_RSC).play();
                         bg.robots[robot].stunnedLogic();
                     }
                 }
@@ -148,6 +149,7 @@ class PlayingState extends BasicGameState {
             if (bg.survivor.collides(bg.pickupBolts.get(bolt)) != null) {
                 bg.boltNum++;
                 bg.pickupBolts.remove(bolt);
+                ResourceManager.getSound(MainGame.BOLT_PICKUP).play();
             }
         }
 
@@ -198,7 +200,8 @@ class PlayingState extends BasicGameState {
         // Check if you won the level
         if (bg.panelHealth[0] <= 0 && bg.panelHealth[1] <= 0 && bg.panelHealth[2] <= 0) {
             if (bg.getCurrentState().getID() == MainGame.LEVEL2STATE) {
-                game.enterState(MainGame.WINSTATE);
+                ResourceManager.getSound(MainGame.WINNING_RSC).play();
+                game.enterState(MainGame.WINSTATE, new EmptyTransition(), new BlobbyTransition());
             } else {
                 game.enterState(MainGame.CONTINUE);
             }

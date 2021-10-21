@@ -4,6 +4,7 @@ import jig.ResourceManager;
 import jig.Vector;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -15,6 +16,7 @@ import java.util.*;
 
 public class MainGame extends StateBasedGame {
 
+    // states
     public static final int STARTUPSTATE = 0;
     public static final int PLAYINGSTATE = 1;
     public static final int GAMEOVERSTATE = 2;
@@ -23,6 +25,7 @@ public class MainGame extends StateBasedGame {
     public static final int WINSTATE = 5;
     public static final int CONTINUE = 6;
 
+    // graphics
     public static final String TEST_PIC = "Resource/Survivor.png";
     public static final String TEST_WALL = "Resource/Level1Block.png";
     public static final String TEST_WALL2 = "Resource/Level2Block.png";
@@ -40,8 +43,16 @@ public class MainGame extends StateBasedGame {
     public static final String BACKGROUND_RSC = "Resource/Background.png";
     public static final String START_SCREEN_RSC = "Resource/StartScreen.png";
 
+    // map files
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
     public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
+
+    // sounds and music
+    public static final String MAIN_TUNE_RSC = "Resource/Sound/404452__furbyguy__synthwave-loop.wav";
+    public static final String HIT_SOUND_RSC = "Resource/Sound/66918__mikemunkie__synthtomlow.wav";
+    public static final String BOLT_PICKUP = "Resource/Sound/411443__abbasgamez__powerup2.wav";
+    public static final String GAME_OVER_RSC = "Resource/Sound/415079__harrietniamh__video-game-death-sound-effect.wav";
+    public static final String WINNING_RSC = "Resource/Sound/518855__mrickey13__fight-win-tune.wav";
 
     public final int ScreenWidth;
     public final int ScreenHeight;
@@ -58,6 +69,8 @@ public class MainGame extends StateBasedGame {
     ArrayList<Bolt> pickupBolts;
 
     int boltNum;
+
+    Music tune;
 
     // test
     Bolt bolt = null;
@@ -95,6 +108,12 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(BACKGROUND_RSC);
         ResourceManager.loadImage(START_SCREEN_RSC);
         ResourceManager.loadImage(BOLT_PIC);
+
+        ResourceManager.loadMusic(MAIN_TUNE_RSC);
+        ResourceManager.loadSound(HIT_SOUND_RSC);
+        ResourceManager.loadSound(BOLT_PICKUP);
+        ResourceManager.loadSound(GAME_OVER_RSC);
+        ResourceManager.loadSound(WINNING_RSC);
 
     }
 

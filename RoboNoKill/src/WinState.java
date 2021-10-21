@@ -7,9 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.BlobbyTransition;
-import org.newdawn.slick.state.transition.EmptyTransition;
-import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+import org.newdawn.slick.state.transition.*;
 
 class WinState extends BasicGameState {
 
@@ -43,7 +41,7 @@ class WinState extends BasicGameState {
 
         timer -= delta;
         if (timer <= 0)
-            game.enterState(MainGame.STARTUPSTATE, new EmptyTransition(), new BlobbyTransition());
+            game.enterState(MainGame.STARTUPSTATE, new FadeOutTransition(), new FadeInTransition());
 
     }
 
