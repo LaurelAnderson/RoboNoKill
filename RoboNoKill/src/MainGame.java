@@ -15,6 +15,7 @@ import java.util.*;
 
 public class MainGame extends StateBasedGame {
 
+    // states
     public static final int STARTUPSTATE = 0;
     public static final int PLAYINGSTATE = 1;
     public static final int GAMEOVERSTATE = 2;
@@ -23,6 +24,7 @@ public class MainGame extends StateBasedGame {
     public static final int WINSTATE = 5;
     public static final int CONTINUE = 6;
 
+    // graphics
     public static final String TEST_PIC = "Resource/Survivor.png";
     public static final String TEST_WALL = "Resource/Level1Block.png";
     public static final String TEST_WALL2 = "Resource/Level2Block.png";
@@ -40,8 +42,12 @@ public class MainGame extends StateBasedGame {
     public static final String BACKGROUND_RSC = "Resource/Background.png";
     public static final String START_SCREEN_RSC = "Resource/StartScreen.png";
 
+    // map files
     public static final String TEST_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest.txt";
     public static final String TEST2_TXT = "RoboNoKill/RoboNoKill/src/Resource/maptest2.txt";
+
+    // sounds and music
+    public static final String MAIN_TUNE_RSC = "Resource/Sound/404452__furbyguy__synthwave-loop.wav";
 
     public final int ScreenWidth;
     public final int ScreenHeight;
@@ -95,6 +101,8 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(BACKGROUND_RSC);
         ResourceManager.loadImage(START_SCREEN_RSC);
         ResourceManager.loadImage(BOLT_PIC);
+
+        ResourceManager.loadMusic(MAIN_TUNE_RSC);
 
     }
 

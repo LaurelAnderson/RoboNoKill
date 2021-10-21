@@ -43,9 +43,9 @@ public class Continue extends BasicGameState {
         Input input = container.getInput();
         MainGame bg = (MainGame)game;
 
-        if (input.isKeyPressed(Input.KEY_SPACE))
+        if (input.isKeyDown(Input.KEY_SPACE))
             bg.enterState(MainGame.LEVEL2STATE);
-        else if (input.isKeyPressed(Input.KEY_ESCAPE))
+        else if (input.isKeyDown(Input.KEY_ESCAPE))
             bg.enterState(MainGame.STARTUPSTATE);
 
     }
