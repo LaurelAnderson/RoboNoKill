@@ -163,7 +163,7 @@ class PlayingState extends BasicGameState {
             if (bg.panelHealth[bg.survivor.whereYouAt().whatPanel] < 0) {
                 bg.panelHealth[bg.survivor.whereYouAt().whatPanel] = 0;
             } else {
-                bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.5f;
+                bg.panelHealth[bg.survivor.whereYouAt().whatPanel] -= 0.15f;
             }
         }
 
@@ -173,13 +173,13 @@ class PlayingState extends BasicGameState {
 
         // basic movement can only click one at a time
         if (input.isKeyDown(Input.KEY_D)) {
-            bg.survivor.setMoving(new Vector(4,0), bg.mapArray[i][j+1]);
+            bg.survivor.setMoving(new Vector(3,0), bg.mapArray[i][j+1]);
         } else if (input.isKeyDown(Input.KEY_A)) {
-            bg.survivor.setMoving(new Vector(-4, 0), bg.mapArray[i][j-1]);
+            bg.survivor.setMoving(new Vector(-3, 0), bg.mapArray[i][j-1]);
         } else if (input.isKeyDown(Input.KEY_S)) {
-            bg.survivor.setMoving(new Vector(0,4), bg.mapArray[i+1][j]);
+            bg.survivor.setMoving(new Vector(0,3), bg.mapArray[i+1][j]);
         } else if (input.isKeyDown(Input.KEY_W)) {
-            bg.survivor.setMoving(new Vector(0,-4), bg.mapArray[i-1][j]);
+            bg.survivor.setMoving(new Vector(0,-3), bg.mapArray[i-1][j]);
         }
 
         // fire a bolt!

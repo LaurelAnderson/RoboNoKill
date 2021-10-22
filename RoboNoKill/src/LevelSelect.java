@@ -29,11 +29,11 @@ public class LevelSelect extends BasicGameState {
         g.drawImage(ResourceManager.getImage(MainGame.BACKGROUND_RSC), 0,
                 0);
 
-        g.drawImage(ResourceManager.getImage(MainGame.LEVEL_SELECT_RSC),150,
+        g.drawImage(ResourceManager.getImage(MainGame.LEVEL_SELECT_RSC),145,
                 230);
 
-        g.drawString("Press 1 for level one", 290, 500);
-        g.drawString("Press 2 for level two", 290, 550);
+        g.drawString("Press 1 for level one", 345, 500);
+        g.drawString("Press 2 for level two", 345, 550);
 
     }
 
