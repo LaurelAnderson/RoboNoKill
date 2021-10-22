@@ -24,6 +24,7 @@ public class MainGame extends StateBasedGame {
     public static final int LEVEL2STATE = 4;
     public static final int WINSTATE = 5;
     public static final int CONTINUE = 6;
+    public static final int LEVEL_SELECT = 7;
 
     // graphics
     public static final String TEST_PIC = "Resource/Survivor.png";
@@ -40,6 +41,7 @@ public class MainGame extends StateBasedGame {
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
     public static final String WIN_BANNER_RSC = "Resource/Win.png";
     public static final String CONTINEUE_RSC = "Resource/Continue.png";
+    public static final String LEVEL_SELECT_RSC = "Resource/LevelSelect.png";
 
     public static final String BACKGROUND_RSC = "Resource/Background.png";
     public static final String START_SCREEN_RSC = "Resource/StartScreen.png";
@@ -98,6 +100,7 @@ public class MainGame extends StateBasedGame {
         addState(new Level2());
         addState(new WinState());
         addState(new Continue());
+        addState(new LevelSelect());
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
@@ -114,6 +117,7 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(START_SCREEN_RSC);
         ResourceManager.loadImage(BOLT_PIC);
         ResourceManager.loadImage(BANG_EXPLOSIONIMG_RSC);
+        ResourceManager.loadImage(LEVEL_SELECT_RSC);
 
         ResourceManager.loadMusic(MAIN_TUNE_RSC);
         ResourceManager.loadSound(HIT_SOUND_RSC);

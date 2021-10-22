@@ -215,6 +215,11 @@ class PlayingState extends BasicGameState {
             }
         }
 
+        // Check if we go to level select
+        if (input.isKeyDown(Input.KEY_ESCAPE)) {
+            game.enterState(MainGame.LEVEL_SELECT);
+        }
+
     }
 
     public void dijkstraAlgo(MainGame bg) {
