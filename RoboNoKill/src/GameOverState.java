@@ -20,7 +20,11 @@ class GameOverState extends BasicGameState {
 
     @Override
     public void enter(GameContainer container, StateBasedGame game) {
+
         timer = 4000;
+        MainGame bg = (MainGame)game;
+        bg.tune.setVolume(0.3f);
+
     }
 
     @Override
