@@ -108,8 +108,8 @@ class Robot extends Entity {
         if (this.stunned) this.stunTimer -= delta;
 
         if (this.stunned && this.stunTimer <= 0) {
-            System.out.println("We are done being stunned");
-            System.out.println("I want to go this way now " + this.wasGoing);
+//            System.out.println("We are done being stunned");
+//            System.out.println("I want to go this way now " + this.wasGoing);
             this.stunned = false;
             this.setDirection(this.wasGoing);
         }
