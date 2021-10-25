@@ -24,6 +24,7 @@ public class MainGame extends StateBasedGame {
     public static final int LEVEL2STATE = 4;
     public static final int WINSTATE = 5;
     public static final int CONTINUE = 6;
+    public static final int LEVEL_SELECT = 7;
 
     // graphics
     public static final String TEST_PIC = "Resource/Survivor.png";
@@ -35,10 +36,12 @@ public class MainGame extends StateBasedGame {
     public static final String ROBO_2_PIC = "Resource/Robo2.png";
     public static final String ROBO_3_PIC = "Resource/Robo3.png";
     public static final String BOLT_PIC = "Resource/Bolt.png";
+    public static final String BANG_EXPLOSIONIMG_RSC = "Resource/explosion.png";
 
     public static final String GAMEOVER_BANNER_RSC = "Resource/GameOver.png";
     public static final String WIN_BANNER_RSC = "Resource/Win.png";
     public static final String CONTINEUE_RSC = "Resource/Continue.png";
+    public static final String LEVEL_SELECT_RSC = "Resource/LevelSelect.png";
 
     public static final String BACKGROUND_RSC = "Resource/Background.png";
     public static final String START_SCREEN_RSC = "Resource/StartScreen.png";
@@ -75,12 +78,16 @@ public class MainGame extends StateBasedGame {
     // test
     Bolt bolt = null;
 
+    ArrayList<Bang> explosions;
+
     public MainGame(String title, int width, int height) {
         super(title);
         ScreenHeight = height;
         ScreenWidth = width;
         Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 
+        // add an array of explosions
+        explosions = new ArrayList<Bang>(3);
     }
 
     @Override
@@ -93,6 +100,7 @@ public class MainGame extends StateBasedGame {
         addState(new Level2());
         addState(new WinState());
         addState(new Continue());
+        addState(new LevelSelect());
 
         ResourceManager.loadImage(TEST_PIC);
         ResourceManager.loadImage(TEST_WALL);
@@ -108,6 +116,8 @@ public class MainGame extends StateBasedGame {
         ResourceManager.loadImage(BACKGROUND_RSC);
         ResourceManager.loadImage(START_SCREEN_RSC);
         ResourceManager.loadImage(BOLT_PIC);
+        ResourceManager.loadImage(BANG_EXPLOSIONIMG_RSC);
+        ResourceManager.loadImage(LEVEL_SELECT_RSC);
 
         ResourceManager.loadMusic(MAIN_TUNE_RSC);
         ResourceManager.loadSound(HIT_SOUND_RSC);
